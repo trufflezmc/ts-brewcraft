@@ -1,19 +1,12 @@
 {
   "itemGroup.tsbrewcraft.main": "T's Brewcraft",
-
-  "block.tsbrewcraft.barrel": "Barrel",
-  "block.tsbrewcraft.keg": "Keg",
-
-  "block.tsbrewcraft.sulfur_stick": "Sulfur Stick",
   
   "item.tsbrewcraft.barley": "Barley",
   "item.tsbrewcraft.kilned_barley": "Kilned Barley",
   "item.tsbrewcraft.hops": "Hops",
-  
   "item.tsbrewcraft.rice": "Rice",
   "item.tsbrewcraft.steamed_rice": "Steamed Rice",
   "item.tsbrewcraft.moldy_rice": "Moldy Rice",
-  
   "item.tsbrewcraft.grapes": "Grapes",
   
   "item.tsbrewcraft.beer": "Beer",
@@ -23,15 +16,26 @@
   "item.tsbrewcraft.red_wine": "Red Wine",
   "item.tsbrewcraft.white_wine": "White Wine",
   "item.tsbrewcraft.rose": "Rosé",
-  "item.tsbrewcraft.champange": "Champange",
+  "item.tsbrewcraft.champagne": "Champagne",
   "item.tsbrewcraft.rum": "Rum",
   "item.tsbrewcraft.tequila": "Tequila",
   "item.tsbrewcraft.vodka": "Vodka",
   "item.tsbrewcraft.brandy": "Brandy",
   "item.tsbrewcraft.whiskey": "Whiskey",
-  "item.tsbrewcraft.boubon": "Boubon",
+  "item.tsbrewcraft.bourbon": "Bourbon",
   "item.tsbrewcraft.shochu": "Shochu",
   "item.tsbrewcraft.moonshine": "Moonshine",
+  "item.tsbrewcraft.vinegar": "Vinegar",
 
-  "item.tsbrewcraft.vinegar": "Vinegar"
+  "block.tsbrewcraft.barrel": "Barrel",
+  "block.tsbrewcraft.keg": "Keg",
+
+  "block.tsbrewcraft.sulfur_stick": "Sulfur Stick",
+  
+  "item.tsbrewcraft.beer_bottle": "Beer Bottle",
+  "item.tsbrewcraft.wine_bottle": "Wine Bottle",
+  "item.tsbrewcraft.cork": "Cork",
+  "item.tsbrewcraft.crown_cap": "Crown Cap",
+  "item.tsbrewcraft.muselet": "Muselet",
+  "item.tsbrewcraft.wine_thief": "Wine Thief"
 }

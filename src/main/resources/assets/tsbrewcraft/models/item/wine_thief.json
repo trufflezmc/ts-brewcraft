@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "tsbrewcraft:item/hops"
+    "layer0": "tsbrewcraft:item/wine_thief"
   }
 }

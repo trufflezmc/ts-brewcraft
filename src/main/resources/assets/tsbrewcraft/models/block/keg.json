@@ -1,7 +1,7 @@
 {
   "parent": "block/cube_column",
   "textures": {
-    "end": "tsarcanum:block/keg_top",
-    "side": "tsarcanum:block/keg"
+    "end": "tsbrewcraft:block/keg_top",
+    "side": "tsbrewcraft:block/keg"
   }
 }

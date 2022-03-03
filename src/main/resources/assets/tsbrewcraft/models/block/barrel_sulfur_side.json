@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_column",
+  "textures": {
+    "end": "tsbrewcraft:block/barrel_top",
+    "side": "tsbrewcraft:block/barrel"
+  }
+}

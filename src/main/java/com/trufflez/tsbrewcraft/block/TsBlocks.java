@@ -35,7 +35,7 @@ public class TsBlocks {
         KEG = register("keg", new KegBlock(FabricBlockSettings.of(Material.WOOD).strength(4.0f)));
         BARREL = register("barrel", new BarrelBlock(FabricBlockSettings.of(Material.WOOD).strength(4.0f)));
 
-        SULFUR_STICK = register("barrel", new SulfurStick(FabricBlockSettings.of(Material.WOOD).strength(4.0f)));
+        SULFUR_STICK = register("sulfur_stick", new SulfurStick(FabricBlockSettings.of(Material.STONE).breakInstantly()));
     }
     
     public static void init() {

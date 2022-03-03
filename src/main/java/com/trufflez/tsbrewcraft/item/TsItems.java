@@ -1,6 +1,7 @@
 package com.trufflez.tsbrewcraft.item;
 
 import com.trufflez.tsbrewcraft.TsBrewcraft;
+import com.trufflez.tsbrewcraft.item.patches.TsFoodComponents;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
@@ -26,7 +27,7 @@ public class TsItems {
     public static final Item RED_WINE;
     public static final Item WHITE_WINE;
     public static final Item ROSE;
-    public static final Item CHAMPANGE;
+    public static final Item CHAMPAGNE;
     public static final Item RUM;
     public static final Item TEQUILA;
     public static final Item VODKA;
@@ -35,8 +36,15 @@ public class TsItems {
     public static final Item BOURBON;
     public static final Item SHOCHU;
     public static final Item MOONSHINE;
-
+    
     public static final Item VINEGAR;
+    
+    public static final Item BEER_BOTTLE;
+    public static final Item WINE_BOTTLE;
+    public static final Item CORK;
+    public static final Item CROWN_CAP;
+    public static final Item MUSELET;
+    public static final Item WINE_THIEF;
     
     //private static BlockItem blockItem(Block block) { return new BlockItem(block, new FabricItemSettings().group(TsItemGroups.MAIN)); }
 
@@ -47,31 +55,36 @@ public class TsItems {
         BARLEY = register("barley", new Item(new FabricItemSettings().group(TsItemGroups.MAIN)));
         KILNED_BARLEY = register("kilned_barley", new Item(new FabricItemSettings().group(TsItemGroups.MAIN)));
         HOPS = register("hops", new Item(new FabricItemSettings().group(TsItemGroups.MAIN)));
-
         RICE = register("rice", new Item(new FabricItemSettings().group(TsItemGroups.MAIN)));
-        STEAMED_RICE = register("steamed_rice", new Item(new FabricItemSettings().group(TsItemGroups.MAIN)));
-        MOLDY_RICE = register("moldy_rice", new Item(new FabricItemSettings().group(TsItemGroups.MAIN)));
-
-        GRAPES = register("grapes", new Item(new FabricItemSettings().group(TsItemGroups.MAIN)));
+        STEAMED_RICE = register("steamed_rice", new Item(new FabricItemSettings().group(TsItemGroups.MAIN).food(TsFoodComponents.STEAMED_RICE)));
+        MOLDY_RICE = register("moldy_rice", new Item(new FabricItemSettings().group(TsItemGroups.MAIN).food(TsFoodComponents.MOLDY_RICE)));
+        GRAPES = register("grapes", new Item(new FabricItemSettings().group(TsItemGroups.MAIN).food(TsFoodComponents.GRAPES)));
         
-        BEER = register("beer", new Item(new FabricItemSettings().group(TsItemGroups.MAIN)));
-        WHEAT_BEER = register("wheat_beer", new Item(new FabricItemSettings().group(TsItemGroups.MAIN)));
-        LAMBIC = register("lambic", new Item(new FabricItemSettings().group(TsItemGroups.MAIN)));
-        SAKE = register("sake", new Item(new FabricItemSettings().group(TsItemGroups.MAIN)));
-        RED_WINE = register("red_wine", new Item(new FabricItemSettings().group(TsItemGroups.MAIN)));
-        WHITE_WINE = register("white_wine", new Item(new FabricItemSettings().group(TsItemGroups.MAIN)));
-        ROSE = register("rose", new Item(new FabricItemSettings().group(TsItemGroups.MAIN)));
-        CHAMPANGE = register("champange", new Item(new FabricItemSettings().group(TsItemGroups.MAIN)));
-        RUM = register("rum", new Item(new FabricItemSettings().group(TsItemGroups.MAIN)));
-        TEQUILA = register("tequila", new Item(new FabricItemSettings().group(TsItemGroups.MAIN)));
-        VODKA = register("vodka", new Item(new FabricItemSettings().group(TsItemGroups.MAIN)));
-        BRANDY = register("brandy", new Item(new FabricItemSettings().group(TsItemGroups.MAIN)));
-        WHISKEY = register("whiskey", new Item(new FabricItemSettings().group(TsItemGroups.MAIN)));
-        BOURBON = register("bourbon", new Item(new FabricItemSettings().group(TsItemGroups.MAIN)));
-        SHOCHU = register("shochu", new Item(new FabricItemSettings().group(TsItemGroups.MAIN)));
-        MOONSHINE = register("moonshine", new Item(new FabricItemSettings().group(TsItemGroups.MAIN)));
+        BEER = register("beer", new Item(new FabricItemSettings().group(TsItemGroups.MAIN).food(TsFoodComponents.BEER)));
+        WHEAT_BEER = register("wheat_beer", new Item(new FabricItemSettings().group(TsItemGroups.MAIN).food(TsFoodComponents.WHEAT_BEER)));
+        LAMBIC = register("lambic", new Item(new FabricItemSettings().group(TsItemGroups.MAIN).food(TsFoodComponents.LAMBIC)));
+        SAKE = register("sake", new Item(new FabricItemSettings().group(TsItemGroups.MAIN).food(TsFoodComponents.SAKE)));
+        RED_WINE = register("red_wine", new Item(new FabricItemSettings().group(TsItemGroups.MAIN).food(TsFoodComponents.RED_WINE)));
+        WHITE_WINE = register("white_wine", new Item(new FabricItemSettings().group(TsItemGroups.MAIN).food(TsFoodComponents.WHITE_WINE)));
+        ROSE = register("rose", new Item(new FabricItemSettings().group(TsItemGroups.MAIN).food(TsFoodComponents.ROSE)));
+        CHAMPAGNE = register("champagne", new Item(new FabricItemSettings().group(TsItemGroups.MAIN).food(TsFoodComponents.CHAMPAGNE)));
+        RUM = register("rum", new Item(new FabricItemSettings().group(TsItemGroups.MAIN).food(TsFoodComponents.RUM)));
+        TEQUILA = register("tequila", new Item(new FabricItemSettings().group(TsItemGroups.MAIN).food(TsFoodComponents.TEQUILA)));
+        VODKA = register("vodka", new Item(new FabricItemSettings().group(TsItemGroups.MAIN).food(TsFoodComponents.VODKA)));
+        BRANDY = register("brandy", new Item(new FabricItemSettings().group(TsItemGroups.MAIN).food(TsFoodComponents.BRANDY)));
+        WHISKEY = register("whiskey", new Item(new FabricItemSettings().group(TsItemGroups.MAIN).food(TsFoodComponents.WHISKEY)));
+        BOURBON = register("bourbon", new Item(new FabricItemSettings().group(TsItemGroups.MAIN).food(TsFoodComponents.BOURBON)));
+        SHOCHU = register("shochu", new Item(new FabricItemSettings().group(TsItemGroups.MAIN).food(TsFoodComponents.SHOCHU)));
+        MOONSHINE = register("moonshine", new Item(new FabricItemSettings().group(TsItemGroups.MAIN).food(TsFoodComponents.MOONSHINE)));
 
-        VINEGAR = register("vinegar", new Item(new FabricItemSettings().group(TsItemGroups.MAIN)));
+        VINEGAR = register("vinegar", new Item(new FabricItemSettings().group(TsItemGroups.MAIN).food(TsFoodComponents.VINEGAR)));
+
+        BEER_BOTTLE = register("beer_bottle", new Item(new FabricItemSettings().group(TsItemGroups.MAIN)));
+        WINE_BOTTLE = register("wine_bottle", new Item(new FabricItemSettings().group(TsItemGroups.MAIN)));
+        CORK = register("cork", new Item(new FabricItemSettings().group(TsItemGroups.MAIN)));
+        CROWN_CAP = register("crown_cap", new Item(new FabricItemSettings().group(TsItemGroups.MAIN)));
+        MUSELET = register("muselet", new Item(new FabricItemSettings().group(TsItemGroups.MAIN)));
+        WINE_THIEF = register("wine_thief", new Item(new FabricItemSettings().group(TsItemGroups.MAIN)));
     }
     
     public static void init() {
