@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "id": "tsbrewcraft",
+  "version": "${version}",
+
+  "name": "T's Brewcraft",
+  "description": "Make your own questionable beverages from crop to cup!",
+  "authors": [
+    "TrufflezMC"
+  ],
+  "contact": {
+    "homepage": "https://github.com/trufflezmc/ts-brewcraft",
+    "issues": "https://github.com/trufflezmc/ts-brewcraft/issues",
+    "sources": "https://github.com/trufflezmc/ts-brewcraft"
+  },
+
+  "license": "GNU Lesser General Public License version 3 (LGPLv3)",
+  "icon": "assets/tsbrewcraft/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.trufflez.tsbrewcraft.TsBrewcraft"
+    ]
+  },
+  "mixins": [
+    "tsbrewcraft.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.13.3",
+    "fabric": "*",
+    "minecraft": "1.18.x",
+    "java": ">=17"
+  }
+}
