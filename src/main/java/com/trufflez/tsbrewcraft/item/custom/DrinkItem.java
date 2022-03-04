@@ -2,7 +2,6 @@ package com.trufflez.tsbrewcraft.item.custom;
 
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -17,8 +16,8 @@ import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.UseAction;
 import net.minecraft.world.World;
 
-public class TsGenericDrinkItem extends Item {
-    public TsGenericDrinkItem(Settings settings) {
+public class DrinkItem extends Item {
+    public DrinkItem(Settings settings) {
         super(settings);
     }
 
@@ -55,13 +54,9 @@ public class TsGenericDrinkItem extends Item {
         return UseAction.DRINK;
     }
 
-    public SoundEvent getDrinkSound() {
-        return SoundEvents.ITEM_HONEY_BOTTLE_DRINK;
-    }
+    public SoundEvent getDrinkSound() { return SoundEvents.ENTITY_GENERIC_DRINK; }
 
-    public SoundEvent getEatSound() {
-        return SoundEvents.ITEM_HONEY_BOTTLE_DRINK;
-    }
+    public SoundEvent getEatSound() { return SoundEvents.ENTITY_GENERIC_DRINK; }
 
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         return ItemUsage.consumeHeldItem(world, user, hand);

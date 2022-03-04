@@ -1,4 +1,4 @@
-package com.trufflez.tsbrewcraft.item.patches;
+package com.trufflez.tsbrewcraft.item;
 
 import com.trufflez.tsbrewcraft.TsBrewcraft;
 import net.minecraft.item.FoodComponent;
@@ -7,6 +7,7 @@ public class TsFoodComponents {
     public static final FoodComponent STEAMED_RICE;
     public static final FoodComponent MOLDY_RICE;
     public static final FoodComponent GRAPES;
+    public static final FoodComponent CORN;
     
     public static final FoodComponent BEER;
     public static final FoodComponent WHEAT_BEER;
@@ -38,6 +39,7 @@ public class TsFoodComponents {
         STEAMED_RICE = food(8, 0.2f);
         MOLDY_RICE = food(1, 0f);
         GRAPES = food(4, 0.6f);
+        CORN = food(6, 0.6f);
         
         BEER = drink(2).build();
         WHEAT_BEER = drink(2).build();
