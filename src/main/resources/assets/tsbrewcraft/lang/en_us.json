@@ -2,7 +2,8 @@
   "itemGroup.tsbrewcraft.main": "T's Brewcraft",
   
   "item.tsbrewcraft.barley": "Barley",
-  "item.tsbrewcraft.kilned_barley": "Kilned Barley",
+  "item.tsbrewcraft.pale_malt": "Pale Malt",
+  "item.tsbrewcraft.dark_malt": "Dark Malt",
   "item.tsbrewcraft.hops": "Hops",
   "item.tsbrewcraft.rice": "Rice",
   "item.tsbrewcraft.steamed_rice": "Steamed Rice",
@@ -39,5 +40,7 @@
   "item.tsbrewcraft.cork": "Cork",
   "item.tsbrewcraft.crown_cap": "Crown Cap",
   "item.tsbrewcraft.muselet": "Muselet",
-  "item.tsbrewcraft.wine_thief": "Wine Thief"
+  "item.tsbrewcraft.wine_thief": "Wine Thief",
+
+  "item.tsbrewcraft.crappy_beer": "Crappy Beer"
 }

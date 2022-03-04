@@ -9,7 +9,8 @@ import net.minecraft.util.registry.Registry;
 
 public class TsItems {
     public static final Item BARLEY;
-    public static final Item KILNED_BARLEY;
+    public static final Item PALE_MALT;
+    public static final Item DARK_MALT;
     public static final Item HOPS;
     public static final Item RICE;
     public static final Item STEAMED_RICE;
@@ -43,6 +44,8 @@ public class TsItems {
     public static final Item CROWN_CAP;
     public static final Item MUSELET;
     public static final Item WINE_THIEF;
+
+    public static final Item CRAPPY_BEER;
     
     //private static BlockItem blockItem(Block block) { return new BlockItem(block, new FabricItemSettings().group(TsItemGroups.MAIN)); }
 
@@ -52,7 +55,8 @@ public class TsItems {
     
     static {
         BARLEY = register("barley", new Item(new FabricItemSettings().group(TsItemGroups.MAIN)));
-        KILNED_BARLEY = register("kilned_barley", new Item(new FabricItemSettings().group(TsItemGroups.MAIN)));
+        PALE_MALT = register("pale_malt", new Item(new FabricItemSettings().group(TsItemGroups.MAIN)));
+        DARK_MALT = register("dark_malt", new Item(new FabricItemSettings().group(TsItemGroups.MAIN)));
         HOPS = register("hops", new Item(new FabricItemSettings().group(TsItemGroups.MAIN)));
         RICE = register("rice", new Item(new FabricItemSettings().group(TsItemGroups.MAIN)));
         STEAMED_RICE = register("steamed_rice", new Item(new FabricItemSettings().group(TsItemGroups.MAIN).food(TsFoodComponents.STEAMED_RICE)));
@@ -86,6 +90,8 @@ public class TsItems {
         CROWN_CAP = register("crown_cap", new Item(new FabricItemSettings().group(TsItemGroups.MAIN)));
         MUSELET = register("muselet", new Item(new FabricItemSettings().group(TsItemGroups.MAIN)));
         WINE_THIEF = register("wine_thief", new Item(new FabricItemSettings().group(TsItemGroups.MAIN)));
+
+        CRAPPY_BEER = register("crappy_beer", new DrinkItem(new FabricItemSettings().group(TsItemGroups.MAIN).food(TsFoodComponents.CRAPPY_BEER)));
     }
     
     public static void init() {
