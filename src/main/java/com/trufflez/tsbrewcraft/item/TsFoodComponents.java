@@ -11,6 +11,7 @@ public class TsFoodComponents {
     
     public static final FoodComponent BEER;
     public static final FoodComponent WHEAT_BEER;
+    public static final FoodComponent MALT_LIQUOR;
     public static final FoodComponent LAMBIC;
     public static final FoodComponent SAKE;
     public static final FoodComponent RED_WINE;
@@ -25,9 +26,11 @@ public class TsFoodComponents {
     public static final FoodComponent BOURBON;
     public static final FoodComponent SHOCHU;
     public static final FoodComponent MOONSHINE;
+    
     public static final FoodComponent VINEGAR;
-
     public static final FoodComponent CRAPPY_BEER;
+    public static final FoodComponent CRAPPY_WINE;
+    public static final FoodComponent STRANGE_WINE;
 
     private static FoodComponent.Builder drink(int hunger) {
         return (new FoodComponent.Builder()).hunger(hunger).saturationModifier(0.1F).alwaysEdible();
@@ -45,6 +48,7 @@ public class TsFoodComponents {
         
         BEER = drink(4).build();
         WHEAT_BEER = drink(4).build();
+        MALT_LIQUOR = drink(4).build();
         LAMBIC = drink(4).build();
         SAKE = drink(4).build();
         RED_WINE = drink(4).build();
@@ -59,9 +63,11 @@ public class TsFoodComponents {
         BOURBON = drink(2).build();
         SHOCHU = drink(2).build();
         MOONSHINE = drink(2).build();
+        
         VINEGAR = drink(1).build();
-
         CRAPPY_BEER = drink(2).build();
+        CRAPPY_WINE = drink(4).build();
+        STRANGE_WINE = drink(2).build();
     }
     
     public static void init() {

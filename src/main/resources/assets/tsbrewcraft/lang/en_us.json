@@ -14,6 +14,7 @@
   
   "item.tsbrewcraft.beer": "Beer",
   "item.tsbrewcraft.wheat_beer": "Wheat Beer",
+  "item.tsbrewcraft.malt_liquor": "Malt Liquor",
   "item.tsbrewcraft.lambic": "Lambic",
   "item.tsbrewcraft.sake": "Sake",
   "item.tsbrewcraft.red_wine": "Red Wine",
@@ -28,19 +29,74 @@
   "item.tsbrewcraft.bourbon": "Bourbon",
   "item.tsbrewcraft.shochu": "Shōchū",
   "item.tsbrewcraft.moonshine": "Moonshine",
+  
   "item.tsbrewcraft.vinegar": "Vinegar",
+  "item.tsbrewcraft.crappy_beer": "Crappy Beer",
+  "item.tsbrewcraft.crappy_wine": "Crappy Wine",
+  "item.tsbrewcraft.strange_wine": "''Wine''",
 
+  "block.tsbrewcraft.agave_plant": "Agave Plant",
+  "block.tsbrewcraft.barley_plant": "Barley",
+  "block.tsbrewcraft.corn_plant": "Corn",
+  "block.tsbrewcraft.grape_plant": "Grape Crop",
+  "block.tsbrewcraft.rice_plant": "Rice",
+  
+  
+  
   "block.tsbrewcraft.barrel": "Barrel",
   "block.tsbrewcraft.keg": "Keg",
-
   "block.tsbrewcraft.sulfur_stick": "Sulfur Stick",
-  
   "item.tsbrewcraft.beer_bottle": "Beer Bottle",
   "item.tsbrewcraft.wine_bottle": "Wine Bottle",
   "item.tsbrewcraft.cork": "Cork",
   "item.tsbrewcraft.crown_cap": "Crown Cap",
   "item.tsbrewcraft.muselet": "Muselet",
   "item.tsbrewcraft.wine_thief": "Wine Thief",
+  "item.tsbrewcraft.maltov_cocktail": "Maltov Cocktail",
 
-  "item.tsbrewcraft.crappy_beer": "Crappy Beer"
+  "item.tsbrewcraft.barley.tooltip": "A cereal grain.",
+  "item.tsbrewcraft.pale_malt.tooltip": "Lightly kilned malted barley.",
+  "item.tsbrewcraft.dark_malt.tooltip": "Heavily kilned malted barley.",
+  "item.tsbrewcraft.hops.tooltip": "A bitter flower.",
+  "item.tsbrewcraft.rice.tooltip": "A cereal grain.",
+  "item.tsbrewcraft.steamed_rice.tooltip": "Freshly steamed rice.",
+  "item.tsbrewcraft.moldy_rice.tooltip": "Probably not good anymore...",
+  "item.tsbrewcraft.grapes.tooltip": "High quality wine grapes.",
+  "item.tsbrewcraft.corn.tooltip": "It's corn.",
+  "item.tsbrewcraft.agave.tooltip": "Desert plant with sweet sap.",
+  
+  "item.tsbrewcraft.beer.tooltip": "Made from barley and hops.",
+  "item.tsbrewcraft.wheat_beer.tooltip": "Made from wheat and hops.",
+  "item.tsbrewcraft.malt_liquor.tooltip": "Made from barley.",
+  "item.tsbrewcraft.lambic.tooltip": "Is this still good?",
+  "item.tsbrewcraft.sake.tooltip": "Made from ...rice.",
+  "item.tsbrewcraft.red_wine.tooltip": "It's red wine.",
+  "item.tsbrewcraft.white_wine.tooltip": "It's white wine.",
+  "item.tsbrewcraft.rose.tooltip": "Basically pink white wine.",
+  "item.tsbrewcraft.champagne.tooltip": "Bubbly white wine.",
+  "item.tsbrewcraft.rum.tooltip": "Distilled from sugarcane.",
+  "item.tsbrewcraft.tequila.tooltip": "Distilled from agave.",
+  "item.tsbrewcraft.vodka.tooltip": "Distilled from potatoes.",
+  "item.tsbrewcraft.brandy.tooltip": "Distilled from grapes.",
+  "item.tsbrewcraft.whiskey.tooltip": "Distilled from corn.",
+  "item.tsbrewcraft.bourbon.tooltip": "Distilled from corn.",
+  "item.tsbrewcraft.shochu.tooltip": "Distilled from rice.",
+  "item.tsbrewcraft.moonshine.tooltip": "Just like Granny's.",
+  "item.tsbrewcraft.moonshine.tooltip2": "Drinking this is probably dangerous.",
+  
+  "item.tsbrewcraft.vinegar.tooltip": "Soured... something.",
+  "item.tsbrewcraft.crappy_beer.tooltip": "Many people actually drink this.",
+  "item.tsbrewcraft.crappy_wine.tooltip": "Maybe leave in the cellar for now.",
+  "item.tsbrewcraft.strange_wine.tooltip": "...I guess?",
+  
+  "block.tsbrewcraft.barrel.tooltip": "",
+  "block.tsbrewcraft.keg.tooltip": "",
+  "block.tsbrewcraft.sulfur_stick.tooltip": "",
+  "item.tsbrewcraft.beer_bottle.tooltip": "",
+  "item.tsbrewcraft.wine_bottle.tooltip": "",
+  "item.tsbrewcraft.cork.tooltip": "",
+  "item.tsbrewcraft.crown_cap.tooltip": "",
+  "item.tsbrewcraft.muselet.tooltip": "",
+  "item.tsbrewcraft.wine_thief.tooltip": "",
+  "item.tsbrewcraft.maltov_cocktail.tooltip": "You wouldn't want to drink this."
 }
