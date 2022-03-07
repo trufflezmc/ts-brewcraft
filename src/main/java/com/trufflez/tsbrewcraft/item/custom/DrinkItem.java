@@ -1,14 +1,10 @@
 package com.trufflez.tsbrewcraft.item.custom;
 
 import com.trufflez.tsbrewcraft.item.TsItems;
-import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemUsage;
-import net.minecraft.item.Items;
+import net.minecraft.item.*;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
@@ -21,14 +17,15 @@ import net.minecraft.util.UseAction;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
-import javax.annotation.Tainted;
 import java.util.List;
 
-public class DrinkItem extends Item {
-    public DrinkItem(Settings settings) {
-        super(settings);
-    }
+public class DrinkItem extends TsMultiConsumable {
+    private final int strength;
     
+    public DrinkItem(int uses, int strength, Settings settings) {
+        super(uses, settings);
+        this.strength = strength;
+    }
     
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
@@ -58,9 +55,12 @@ public class DrinkItem extends Item {
     
     public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user) {
         super.finishUsing(stack, world, user);
+        
+        //postUse(stack, user);
+        
         if (user instanceof ServerPlayerEntity) {
             ServerPlayerEntity serverPlayerEntity = (ServerPlayerEntity)user;
-            Criteria.CONSUME_ITEM.trigger(serverPlayerEntity, stack);
+            //Criteria.CONSUME_ITEM.trigger(serverPlayerEntity, stack);
             serverPlayerEntity.incrementStat(Stats.USED.getOrCreateStat(this));
         }
         
@@ -70,20 +70,23 @@ public class DrinkItem extends Item {
         }
         
         // give the player an empty bottle
-        if (stack.isEmpty()) {
-            return new ItemStack(Items.GLASS_BOTTLE); // what to do here?
-        } else {
+        //if (stack.isEmpty()) {
+        //    return new ItemStack(Items.GLASS_BOTTLE); // what to do here?
+        //} else {
             if (user instanceof PlayerEntity && !((PlayerEntity)user).getAbilities().creativeMode) {
-
-                ItemStack itemStack = getEmptyBottle(stack);
-                
-                PlayerEntity playerEntity = (PlayerEntity)user;
-                if (!playerEntity.getInventory().insertStack(itemStack)) {
-                    playerEntity.dropItem(itemStack, false);
-                }
+                stack.damage(1, user, (e) -> {
+                    //e.sendEquipmentBreakStatus(EquipmentSlot.MAINHAND);
+                    
+                    ItemStack itemStack = getEmptyBottle(stack);
+                    
+                    PlayerEntity playerEntity = (PlayerEntity)user;
+                    if (!playerEntity.getInventory().insertStack(itemStack)) {
+                        playerEntity.dropItem(itemStack, false);
+                    }
+                });
             }
             return stack;
-        }
+        //}
     }
     
     private ItemStack getEmptyBottle(ItemStack stack) {
@@ -110,7 +113,16 @@ public class DrinkItem extends Item {
     
     public SoundEvent getEatSound() { return SoundEvents.ENTITY_GENERIC_DRINK; }
     
+    @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
-        return ItemUsage.consumeHeldItem(world, user, hand);
+        //return ItemUsage.consumeHeldItem(world, user, hand);
+        //user.getStackInHand(hand).finishUsing(world, user);
+        
+        //ItemStack stack = user.getStackInHand(hand);
+        //stack.damage(1, user, (e) -> {});
+        
+        return TypedActionResult.consume(user.getStackInHand(hand));
+        
+        //return new TypedActionResult<>(ActionResult.CONSUME_PARTIAL, user.getStackInHand(hand));
     }
 }

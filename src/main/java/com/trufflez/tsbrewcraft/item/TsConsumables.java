@@ -3,7 +3,7 @@ package com.trufflez.tsbrewcraft.item;
 import com.trufflez.tsbrewcraft.TsBrewcraft;
 import net.minecraft.item.FoodComponent;
 
-public class TsFoodComponents {
+public class TsConsumables {
     public static final FoodComponent STEAMED_RICE;
     public static final FoodComponent MOLDY_RICE;
     public static final FoodComponent GRAPES;
