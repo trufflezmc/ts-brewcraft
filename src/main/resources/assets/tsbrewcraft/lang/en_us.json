@@ -38,11 +38,11 @@
   "item.tsbrewcraft.strange_wine": "''Wine''",
 
   "block.tsbrewcraft.agave_plant": "Agave Plant",
-  "block.tsbrewcraft.barley_plant": "Barley",
-  "block.tsbrewcraft.corn_plant": "Corn",
-  "block.tsbrewcraft.grape_plant": "Grape Crop",
-  "block.tsbrewcraft.rice_plant": "Rice",
-  
+  "block.tsbrewcraft.barley_plant": "Barley Plant",
+  "block.tsbrewcraft.corn_plant": "Corn Plant",
+  "block.tsbrewcraft.grape_plant": "Grapevines",
+  "block.tsbrewcraft.hops_plant": "Hop Bine",
+  "block.tsbrewcraft.rice_plant": "Rice Plant",
   
   
   "block.tsbrewcraft.barrel": "Barrel",
@@ -50,6 +50,7 @@
   "block.tsbrewcraft.sulfur_stick": "Sulfur Stick",
   "item.tsbrewcraft.beer_bottle": "Beer Bottle",
   "item.tsbrewcraft.wine_bottle": "Wine Bottle",
+  "item.tsbrewcraft.spirits_bottle": "Spirits Bottle",
   "item.tsbrewcraft.cork": "Cork",
   "item.tsbrewcraft.crown_cap": "Crown Cap",
   "item.tsbrewcraft.muselet": "Muselet",

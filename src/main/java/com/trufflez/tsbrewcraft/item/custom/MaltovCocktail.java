@@ -1,5 +1,7 @@
 package com.trufflez.tsbrewcraft.item.custom;
 
+import com.trufflez.tsbrewcraft.item.Tooltips;
+import com.trufflez.tsbrewcraft.item.patches.TsItem;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -10,11 +12,6 @@ import net.minecraft.world.World;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class MaltovCocktail extends Item {
+public class MaltovCocktail extends TsItem {
     public MaltovCocktail(Settings settings) { super(settings); }
-
-    @Override
-    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        tooltip.add(new TranslatableText("item.tsbrewcraft.maltov_cocktail.tooltip"));
-    }
 }

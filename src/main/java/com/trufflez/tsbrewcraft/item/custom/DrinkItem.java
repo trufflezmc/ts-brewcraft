@@ -1,5 +1,6 @@
 package com.trufflez.tsbrewcraft.item.custom;
 
+import com.trufflez.tsbrewcraft.item.Tooltips;
 import com.trufflez.tsbrewcraft.item.TsItems;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
@@ -29,28 +30,7 @@ public class DrinkItem extends TsMultiConsumable {
     
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        if(stack.isOf(TsItems.BEER)) tooltip.add(new TranslatableText("item.tsbrewcraft.beer.tooltip"));
-        if(stack.isOf(TsItems.WHEAT_BEER)) tooltip.add(new TranslatableText("item.tsbrewcraft.wheat_beer.tooltip"));
-        if(stack.isOf(TsItems.MALT_LIQUOR)) tooltip.add(new TranslatableText("item.tsbrewcraft.malt_liquor.tooltip"));
-        if(stack.isOf(TsItems.LAMBIC)) tooltip.add(new TranslatableText("item.tsbrewcraft.lambic.tooltip"));
-        if(stack.isOf(TsItems.SAKE)) tooltip.add(new TranslatableText("item.tsbrewcraft.sake.tooltip"));
-        if(stack.isOf(TsItems.RED_WINE)) tooltip.add(new TranslatableText("item.tsbrewcraft.red_wine.tooltip"));
-        if(stack.isOf(TsItems.WHITE_WINE)) tooltip.add(new TranslatableText("item.tsbrewcraft.white_wine.tooltip"));
-        if(stack.isOf(TsItems.ROSE)) tooltip.add(new TranslatableText("item.tsbrewcraft.rose.tooltip"));
-        if(stack.isOf(TsItems.CHAMPAGNE)) tooltip.add(new TranslatableText("item.tsbrewcraft.champagne.tooltip"));
-        if(stack.isOf(TsItems.RUM)) tooltip.add(new TranslatableText("item.tsbrewcraft.rum.tooltip"));
-        if(stack.isOf(TsItems.TEQUILA)) tooltip.add(new TranslatableText("item.tsbrewcraft.tequila.tooltip"));
-        if(stack.isOf(TsItems.VODKA)) tooltip.add(new TranslatableText("item.tsbrewcraft.vodka.tooltip"));
-        if(stack.isOf(TsItems.BRANDY)) tooltip.add(new TranslatableText("item.tsbrewcraft.brandy.tooltip"));
-        if(stack.isOf(TsItems.WHISKEY)) tooltip.add(new TranslatableText("item.tsbrewcraft.whiskey.tooltip"));
-        if(stack.isOf(TsItems.BOURBON)) tooltip.add(new TranslatableText("item.tsbrewcraft.bourbon.tooltip"));
-        if(stack.isOf(TsItems.SHOCHU)) tooltip.add(new TranslatableText("item.tsbrewcraft.shochu.tooltip"));
-        if(stack.isOf(TsItems.MOONSHINE)) { tooltip.add(new TranslatableText("item.tsbrewcraft.moonshine.tooltip")); tooltip.add(new TranslatableText("item.tsbrewcraft.moonshine.tooltip2")); }
-        
-        if(stack.isOf(TsItems.VINEGAR)) tooltip.add(new TranslatableText("item.tsbrewcraft.vinegar.tooltip"));
-        if(stack.isOf(TsItems.CRAPPY_BEER)) tooltip.add(new TranslatableText("item.tsbrewcraft.crappy_beer.tooltip"));
-        if(stack.isOf(TsItems.CRAPPY_WINE)) tooltip.add(new TranslatableText("item.tsbrewcraft.crappy_wine.tooltip"));
-        if(stack.isOf(TsItems.STRANGE_WINE)) tooltip.add(new TranslatableText("item.tsbrewcraft.strange_wine.tooltip"));
+        Tooltips.addThis(stack, tooltip);
     }
     
     public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user) {

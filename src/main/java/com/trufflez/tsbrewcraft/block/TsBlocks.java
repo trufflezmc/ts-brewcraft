@@ -19,6 +19,7 @@ public class TsBlocks {
     public static final Block BARLEY;
     public static final Block CORN;
     public static final Block GRAPE;
+    public static final Block HOPS;
     public static final Block RICE;
     
     public static final Block KEG;
@@ -43,10 +44,11 @@ public class TsBlocks {
     }
     
     static {
-        AGAVE = register("agave_plant", new Block(FabricBlockSettings.of(Material.LEAVES).nonOpaque().breakInstantly()));
+        AGAVE = registerItemless("agave_plant", new Block(FabricBlockSettings.of(Material.LEAVES).nonOpaque().breakInstantly()));
         BARLEY = registerItemless("barley_plant", new BarleyCropBlock(FabricBlockSettings.copy(Blocks.WHEAT).nonOpaque().noCollision()));
-        CORN = register("corn_plant", new Block(FabricBlockSettings.of(Material.LEAVES).nonOpaque().breakInstantly()));
-        GRAPE = register("grape_plant", new Block(FabricBlockSettings.of(Material.LEAVES).nonOpaque().strength(2.0f)));
+        CORN = registerItemless("corn_plant", new Block(FabricBlockSettings.of(Material.LEAVES).nonOpaque().noCollision().breakInstantly()));
+        GRAPE = registerItemless("grape_plant", new Block(FabricBlockSettings.of(Material.LEAVES).nonOpaque().strength(2.0f)));
+        HOPS = registerItemless("hops_plant", new Block(FabricBlockSettings.copy(Blocks.WHEAT).nonOpaque().noCollision()));
         RICE = registerItemless("rice_plant", new RiceCropBlock(FabricBlockSettings.copy(Blocks.WHEAT).nonOpaque().noCollision()));
         
         KEG = register("keg", new KegBlock(FabricBlockSettings.of(Material.WOOD).strength(4.0f)));

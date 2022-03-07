@@ -4,16 +4,16 @@ import com.trufflez.tsbrewcraft.TsBrewcraft;
 import com.trufflez.tsbrewcraft.block.TsBlocks;
 import com.trufflez.tsbrewcraft.item.custom.DrinkItem;
 import com.trufflez.tsbrewcraft.item.custom.MaltovCocktail;
+import com.trufflez.tsbrewcraft.item.patches.TsAliasedBlockItem;
+import com.trufflez.tsbrewcraft.item.patches.TsItem;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.block.Block;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.FoodComponent;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
+import net.minecraft.item.*;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 public class TsItems {
+    public static final Item AGAVE;
     public static final Item BARLEY;
     public static final Item PALE_MALT;
     public static final Item HOPS;
@@ -24,8 +24,7 @@ public class TsItems {
     public static final Item GRAPE_SEEDS;
     public static final Item CORN;
     public static final Item CORN_KERNELS;
-    public static final Item AGAVE;
-    
+        
     public static final Item BEER;
     public static final Item WHEAT_BEER;
     public static final Item MALT_LIQUOR;
@@ -52,6 +51,7 @@ public class TsItems {
     
     public static final Item BEER_BOTTLE;
     public static final Item WINE_BOTTLE;
+    public static final Item SPIRITS_BOTTLE;
     public static final Item CORK;
     public static final Item CROWN_CAP;
     public static final Item MUSELET;
@@ -68,7 +68,7 @@ public class TsItems {
     
     // Takes standard FoodComponent
     private static Item register(String id, FoodComponent item) {
-        return Registry.register(Registry.ITEM, new Identifier(TsBrewcraft.MOD_ID, id), new Item(settings().food(item)));
+        return Registry.register(Registry.ITEM, new Identifier(TsBrewcraft.MOD_ID, id), new TsItem(settings().food(item)));
     }
     
     // Takes DrinkItem FoodComponent
@@ -79,7 +79,7 @@ public class TsItems {
     
     // Takes just the name
     private static Item register(String id) {
-        return Registry.register(Registry.ITEM, new Identifier(TsBrewcraft.MOD_ID, id), new Item(settings()));
+        return Registry.register(Registry.ITEM, new Identifier(TsBrewcraft.MOD_ID, id), new TsItem(settings()));
     }
     
     // Takes Block and makes BlockItem
@@ -98,18 +98,18 @@ public class TsItems {
     //private static BlockItem register(String id, BlockItem blockItem) { return Registry.register(Registry.ITEM, new Identifier(TsBrewcraft.MOD_ID, id), blockItem); }
     
     static {
-        BARLEY = register("barley", TsBlocks.BARLEY);
+        AGAVE = register("agave", new TsAliasedBlockItem(TsBlocks.AGAVE, settings()));
+        BARLEY = register("barley", new TsAliasedBlockItem(TsBlocks.BARLEY, settings()));
         PALE_MALT = register("pale_malt");
         HOPS = register("hops");
-        RICE = register("rice", TsBlocks.RICE);
+        RICE = register("rice", new TsAliasedBlockItem(TsBlocks.RICE, settings()));
         STEAMED_RICE = register("steamed_rice", TsConsumables.STEAMED_RICE);
         MOLDY_RICE = register("moldy_rice", TsConsumables.MOLDY_RICE);
         GRAPES = register("grapes", TsConsumables.GRAPES);
-        GRAPE_SEEDS = register("grape_seeds");
-        CORN = register("corn");
+        GRAPE_SEEDS = register("grape_seeds", new TsAliasedBlockItem(TsBlocks.GRAPE, settings()));
+        CORN = register("corn", new TsAliasedBlockItem(TsBlocks.CORN, settings()));
         CORN_KERNELS = register("corn_kernels");
-        AGAVE = register("agave");
-        
+                
         BEER = register("beer", TsConsumables.BEER, 2, 5);
         WHEAT_BEER = register("wheat_beer", TsConsumables.WHEAT_BEER, 2, 7);
         MALT_LIQUOR = register("malt_liquor", TsConsumables.MALT_LIQUOR, 2, 7);
@@ -135,6 +135,7 @@ public class TsItems {
         
         BEER_BOTTLE = register("beer_bottle");
         WINE_BOTTLE = register("wine_bottle");
+        SPIRITS_BOTTLE = register("spirits_bottle");
         CORK = register("cork");
         CROWN_CAP = register("crown_cap");
         MUSELET = register("muselet");
