@@ -101,5 +101,9 @@
   "item.tsbrewcraft.crown_cap.tooltip": "",
   "item.tsbrewcraft.muselet.tooltip": "",
   "item.tsbrewcraft.wine_thief.tooltip": "",
-  "item.tsbrewcraft.maltov_cocktail.tooltip": "You wouldn't want to drink this."
+  "item.tsbrewcraft.maltov_cocktail.tooltip": "You wouldn't want to drink this.",
+
+
+  "effect.tsbrewcraft.tipsy": "Tipsy",
+  "effect.tsbrewcraft.drunk": "Drunk"
 }

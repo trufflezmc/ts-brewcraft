@@ -2,6 +2,7 @@ package com.trufflez.tsbrewcraft;
 
 import com.trufflez.tsbrewcraft.block.TsBlocks;
 import com.trufflez.tsbrewcraft.item.TsItems;
+import com.trufflez.tsbrewcraft.statuseffect.TsStatusEffects;
 import com.trufflez.tsbrewcraft.util.ClientRenderLayer;
 import com.trufflez.tsbrewcraft.util.PropertyRegistry;
 import net.fabricmc.api.ModInitializer;
@@ -22,6 +23,8 @@ public class TsBrewcraft implements ModInitializer {
 		PropertyRegistry.init();
 
 		ClientRenderLayer.init();
+
+		TsStatusEffects.init();
 		
 		LOGGER.info("T's Brewcraft is installed.");
 	}
