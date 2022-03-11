@@ -5,27 +5,32 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.CropBlock;
 import net.minecraft.item.ItemConvertible;
-import net.minecraft.item.Items;
 import net.minecraft.state.property.IntProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldView;
 
-public class RiceCropBlock extends CropBlock {
-    public static final int MAX_AGE = 3;
+public class HopsCropBlock extends CropBlock {
+    public static final int MAX_AGE = 2;
     public static final IntProperty AGE;
     
-    public RiceCropBlock(Settings settings) { super(settings); }
+    public HopsCropBlock(Settings settings) { super(settings); }
     
     @Override
     public ItemConvertible getSeedsItem() {
-        return TsItems.RICE;
+        return TsItems.HOPS;
     }
     
     @Override
     protected boolean canPlantOnTop(BlockState floor, BlockView world, BlockPos pos) {
-        return floor.isOf(Blocks.DIRT);
+        return floor.isOf(Blocks.DIRT) ||
+                floor.isOf(Blocks.GRASS_BLOCK) ||
+                floor.isOf(Blocks.PODZOL) ||
+                floor.isOf(Blocks.MYCELIUM) ||
+                floor.isOf(Blocks.COARSE_DIRT) ||
+                floor.isOf(Blocks.ROOTED_DIRT) ||
+                floor.isOf(Blocks.MOSS_BLOCK);
     }
 
     @Override
@@ -33,14 +38,12 @@ public class RiceCropBlock extends CropBlock {
         return MAX_AGE;
     }
     
-    // May need to override getAvailableMoisture
-    
     @Override
     public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
         return true;
     }
     
     static {
-        AGE = Properties.AGE_3;
+        AGE = Properties.AGE_2;
     }
 }

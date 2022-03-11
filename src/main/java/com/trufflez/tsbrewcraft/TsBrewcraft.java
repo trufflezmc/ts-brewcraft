@@ -11,7 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class TsBrewcraft implements ModInitializer {
-	public static final Logger LOGGER = LoggerFactory.getLogger("modid");
+	public static final Logger LOGGER = LoggerFactory.getLogger("tsbrewcraft");
 	public static final String MOD_ID = "tsbrewcraft";
 	
 	@Override
