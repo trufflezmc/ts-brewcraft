@@ -23,6 +23,7 @@ public class TsItems {
     public static final Item GRAPES;
     public static final Item GRAPE_SEEDS;
     public static final Item CORN;
+    public static final Item STEAMED_CORN;
     public static final Item CORN_KERNELS;
         
     public static final Item BEER;
@@ -107,8 +108,9 @@ public class TsItems {
         MOLDY_RICE = register("moldy_rice", TsConsumables.MOLDY_RICE);
         GRAPES = register("grapes", TsConsumables.GRAPES);
         GRAPE_SEEDS = register("grape_seeds", new TsAliasedBlockItem(TsBlocks.GRAPE, settings()));
-        CORN = register("corn", new TsAliasedBlockItem(TsBlocks.CORN, settings()));
-        CORN_KERNELS = register("corn_kernels");
+        CORN = register("corn");
+        STEAMED_CORN = register("steamed_corn", TsConsumables.STEAMED_CORN);
+        CORN_KERNELS = register("corn_kernels", new TsAliasedBlockItem(TsBlocks.CORN, settings()));
                 
         BEER = register("beer", TsConsumables.BEER, 2, 5);
         WHEAT_BEER = register("wheat_beer", TsConsumables.WHEAT_BEER, 2, 7);

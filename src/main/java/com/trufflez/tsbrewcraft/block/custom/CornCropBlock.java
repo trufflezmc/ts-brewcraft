@@ -41,7 +41,7 @@ public class CornCropBlock extends TallPlantBlock implements Fertilizable {
     }
     
     protected void grow(World world, BlockPos pos) {
-        world.setBlockState(pos.up(), (BlockState)
+        world.setBlockState(pos, (BlockState)
                         TsBlocks.CORN.getDefaultState(),
                 3);
     }

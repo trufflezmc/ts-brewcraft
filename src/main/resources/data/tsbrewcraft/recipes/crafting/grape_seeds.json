@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "tsbrewcraft:grapes"
+    }
+  ],
+  "result": {
+    "item": "tsbrewcraft:grape_seeds"
+  }
+}

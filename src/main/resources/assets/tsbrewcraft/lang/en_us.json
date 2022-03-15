@@ -43,6 +43,13 @@
   "block.tsbrewcraft.grape_plant": "Grapevines",
   "block.tsbrewcraft.hops_plant": "Hop Bine",
   "block.tsbrewcraft.rice_plant": "Rice Plant",
+
+  "block.tsbrewcraft.dead_agave": "Dead Agave",
+  "block.tsbrewcraft.dead_barley": "Dead Barley",
+  "block.tsbrewcraft.dead_corn": "Dead Corn",
+  "block.tsbrewcraft.dead_grape": "Dead Grapes",
+  "block.tsbrewcraft.dead_hops": "Dead Hops",
+  "block.tsbrewcraft.dead_rice": "Dead Rice",
   
   
   "block.tsbrewcraft.barrel": "Barrel",
@@ -66,6 +73,7 @@
   "item.tsbrewcraft.moldy_rice.tooltip": "Probably not good anymore...",
   "item.tsbrewcraft.grapes.tooltip": "High quality wine grapes.",
   "item.tsbrewcraft.corn.tooltip": "It's corn.",
+  "item.tsbrewcraft.steamed_corn.tooltip": "Freshly steamed corn.",
   "item.tsbrewcraft.agave.tooltip": "Desert plant with sweet sap.",
   
   "item.tsbrewcraft.beer.tooltip": "Made from barley and hops.",

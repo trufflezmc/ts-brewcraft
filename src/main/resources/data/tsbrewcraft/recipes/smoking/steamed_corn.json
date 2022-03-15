@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smoking",
+  "ingredient": {
+    "item": "tsbrewcraft:corn"
+  },
+  "result": "tsbrewcraft:steamed_corn",
+  "experience": 0.35,
+  "cookingtime": 100
+}

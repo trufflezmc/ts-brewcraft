@@ -22,11 +22,15 @@ public class TsBlocks {
     public static final Block HOPS;
     public static final Block RICE;
 
+    public static final Block DEAD_AGAVE;
+    public static final Block DEAD_BARLEY;
+    public static final Block DEAD_CORN;
+    public static final Block DEAD_GRAPE;
+    public static final Block DEAD_HOPS;
     public static final Block DEAD_RICE;
     
     public static final Block KEG;
-    //public static final Block BARREL;
-    
+        
     public static final Block SULFUR_STICK;
     
     // Register shortcuts
@@ -52,12 +56,16 @@ public class TsBlocks {
         GRAPE = registerItemless("grape_plant", new Block(FabricBlockSettings.of(Material.LEAVES).nonOpaque().strength(4.0f)));
         HOPS = registerItemless("hops_plant", new HopsCropBlock(FabricBlockSettings.of(Material.LEAVES).nonOpaque().strength(2.0f)));
         RICE = registerItemless("rice_plant", new RiceCropBlock(FabricBlockSettings.copy(Blocks.WHEAT).nonOpaque().noCollision()));
-        
+
+        DEAD_AGAVE = registerItemless("dead_agave", new Block(FabricBlockSettings.of(Material.LEAVES).nonOpaque().noCollision()));
+        DEAD_BARLEY = registerItemless("dead_barley", new Block(FabricBlockSettings.of(Material.LEAVES).nonOpaque().noCollision()));
+        DEAD_CORN = registerItemless("dead_corn", new Block(FabricBlockSettings.of(Material.LEAVES).nonOpaque().noCollision()));
+        DEAD_GRAPE = registerItemless("dead_grape", new Block(FabricBlockSettings.of(Material.LEAVES).nonOpaque().noCollision()));
+        DEAD_HOPS = registerItemless("dead_hops", new Block(FabricBlockSettings.of(Material.LEAVES).nonOpaque().noCollision()));
         DEAD_RICE = registerItemless("dead_rice", new Block(FabricBlockSettings.of(Material.LEAVES).nonOpaque().noCollision()));
         
         KEG = register("keg", new KegBlock(FabricBlockSettings.of(Material.WOOD).strength(4.0f)));
-        //BARREL = register("barrel", new BarrelBlock(FabricBlockSettings.of(Material.WOOD).strength(4.0f)));
-
+        
         SULFUR_STICK = register("sulfur_stick", new SulfurStick(FabricBlockSettings.of(Material.STONE).breakInstantly()));
     }
     

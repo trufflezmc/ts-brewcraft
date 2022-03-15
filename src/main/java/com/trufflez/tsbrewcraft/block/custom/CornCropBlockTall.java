@@ -18,12 +18,12 @@ public class CornCropBlockTall extends TallPlantBlock implements Fertilizable {
     public CornCropBlockTall(Settings settings) {
         super(settings);
     }
-
+    
     @Override
     public boolean isFertilizable(BlockView world, BlockPos pos, BlockState state, boolean isClient) {
         return true;
     }
-
+    
     @Override
     public boolean canGrow(World world, Random random, BlockPos pos, BlockState state) {
         return true;
@@ -33,13 +33,13 @@ public class CornCropBlockTall extends TallPlantBlock implements Fertilizable {
     public ItemConvertible getSeedsItem() {
         return TsItems.CORN;
     }*/
-
+    
     // TODO: this isn't even close to right
     @Override
     public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
         this.grow(world, pos);
     }
-
+    
     protected void grow(World world, BlockPos pos) { 
         world.setBlockState(pos.up(), (BlockState)
                         TsBlocks.CORN.getDefaultState(),

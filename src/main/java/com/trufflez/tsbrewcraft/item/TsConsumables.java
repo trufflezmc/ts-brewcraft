@@ -7,7 +7,7 @@ public class TsConsumables {
     public static final FoodComponent STEAMED_RICE;
     public static final FoodComponent MOLDY_RICE;
     public static final FoodComponent GRAPES;
-    public static final FoodComponent CORN;
+    public static final FoodComponent STEAMED_CORN;
     
     public static final FoodComponent BEER;
     public static final FoodComponent WHEAT_BEER;
@@ -44,7 +44,7 @@ public class TsConsumables {
         STEAMED_RICE = food(8, 0.2f);
         MOLDY_RICE = food(1, 0f);
         GRAPES = food(4, 0.6f);
-        CORN = food(6, 0.6f);
+        STEAMED_CORN = food(6, 0.6f);
         
         BEER = drink(4).build();
         WHEAT_BEER = drink(4).build();

@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smoking",
+  "ingredient": {
+    "item": "tsbrewcraft:pale_malt"
+  },
+  "result": "tsbrewcraft:dark_malt",
+  "experience": 0.15,
+  "cookingtime": 200
+}
