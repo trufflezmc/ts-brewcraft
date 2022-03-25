@@ -24,7 +24,7 @@ public class TsItems {
     public static final Item GRAPE_SEEDS;
     public static final Item CORN;
     public static final Item STEAMED_CORN;
-    public static final Item CORN_KERNELS;
+    public static final Item CORN_SUGAR;
         
     public static final Item BEER;
     public static final Item WHEAT_BEER;
@@ -44,7 +44,8 @@ public class TsItems {
     public static final Item BOURBON;
     public static final Item SHOCHU;
     public static final Item MOONSHINE;
-    
+
+    public static final Item KEFIR;
     public static final Item VINEGAR;
     public static final Item CRAPPY_BEER;
     public static final Item CRAPPY_WINE;
@@ -59,6 +60,11 @@ public class TsItems {
     public static final Item WINE_THIEF;
 
     public static final Item MALTOV_COCKTAIL;
+    
+    // BlockItems, registered here for tooltips
+
+    public static final Item CASK;
+    public static final Item SULFUR_STICK;
     
     //private static BlockItem blockItem(Block block) { return new BlockItem(block, new FabricItemSettings().group(TsItemGroups.MAIN)); }
     
@@ -108,9 +114,9 @@ public class TsItems {
         MOLDY_RICE = register("moldy_rice", TsConsumables.MOLDY_RICE);
         GRAPES = register("grapes", TsConsumables.GRAPES);
         GRAPE_SEEDS = register("grape_seeds", new TsAliasedBlockItem(TsBlocks.GRAPE, settings()));
-        CORN = register("corn");
+        CORN = register("corn", new TsAliasedBlockItem(TsBlocks.CORN, settings()));
         STEAMED_CORN = register("steamed_corn", TsConsumables.STEAMED_CORN);
-        CORN_KERNELS = register("corn_kernels", new TsAliasedBlockItem(TsBlocks.CORN, settings()));
+        CORN_SUGAR = register("corn_sugar");
                 
         BEER = register("beer", TsConsumables.BEER, 2, 5);
         WHEAT_BEER = register("wheat_beer", TsConsumables.WHEAT_BEER, 2, 7);
@@ -129,7 +135,8 @@ public class TsItems {
         BOURBON = register("bourbon", TsConsumables.BOURBON, 4, 40);
         SHOCHU = register("shochu", TsConsumables.SHOCHU, 4, 40);
         MOONSHINE = register("moonshine", TsConsumables.MOONSHINE, 1, 90);
-        
+
+        KEFIR = register("vinegar", TsConsumables.VINEGAR, 3, 0);
         VINEGAR = register("vinegar", TsConsumables.VINEGAR, 1, 0);
         CRAPPY_BEER = register("crappy_beer", TsConsumables.CRAPPY_BEER, 2, 3);
         CRAPPY_WINE = register("crappy_wine", TsConsumables.CRAPPY_WINE, 2, 12);
@@ -144,6 +151,11 @@ public class TsItems {
         WINE_THIEF = register("wine_thief");
         
         MALTOV_COCKTAIL = register("maltov_cocktail", new MaltovCocktail(settings()));
+        
+        // BlockItems, registered here for tooltips
+        
+        CASK = register("cask", TsBlocks.CASK);
+        SULFUR_STICK = register("sulfur_stick", TsBlocks.SULFUR_STICK);
     }
     
     public static void init() {

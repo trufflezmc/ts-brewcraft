@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "pattern": [
+    " # ",
+    "#*#",
+    " # "
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:beeswax"
+    },
+    "*": {
+      "item": "minecraft:barrel"
+    }
+  },
+  "result": {
+    "item": "tsbrewcraft:cask"
+  }
+}

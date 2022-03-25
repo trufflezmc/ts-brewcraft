@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "mold=false": {"model": "tsarcanum:block/steamed_rice"},
+    "mold=true": {"model": "tsarcanum:block/moldy_rice"}
+  }
+}

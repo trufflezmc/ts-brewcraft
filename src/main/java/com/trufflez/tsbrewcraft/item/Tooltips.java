@@ -11,7 +11,7 @@ import java.util.List;
 public class Tooltips {
     
     public static TranslatableText tooltip(String item) {
-        return (TranslatableText) new TranslatableText("item.tsbrewcraft." + item + ".tooltip").formatted(Formatting.GRAY);
+        return (TranslatableText) new TranslatableText("tooltip.tsbrewcraft." + item).formatted(Formatting.GRAY);
     }
     
     public static void addThis(ItemStack stack, List<Text> tooltip){
@@ -33,10 +33,8 @@ public class Tooltips {
         if(i==TsItems.WHISKEY) tooltip.add(tooltip("whiskey"));
         if(i==TsItems.BOURBON) tooltip.add(tooltip("bourbon"));
         if(i==TsItems.SHOCHU) tooltip.add(tooltip("shochu"));
-        if(i==TsItems.MOONSHINE) {
-            tooltip.add(tooltip("moonshine"));
-            tooltip.add(new TranslatableText("item.tsbrewcraft.moonshine.tooltip2").formatted(Formatting.DARK_GRAY));
-        }
+        if(i==TsItems.MOONSHINE) tooltip.add(tooltip("moonshine")); tooltip.add(tooltip("moonshine2"));
+        if(i==TsItems.KEFIR) tooltip.add(tooltip("kefir"));
         if(i==TsItems.VINEGAR) tooltip.add(tooltip("vinegar"));
         if(i==TsItems.CRAPPY_BEER) tooltip.add(tooltip("crappy_beer"));
         if(i==TsItems.CRAPPY_WINE) tooltip.add(tooltip("crappy_wine"));

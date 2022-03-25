@@ -28,8 +28,10 @@ public class TsBlocks {
     public static final Block DEAD_GRAPE;
     public static final Block DEAD_HOPS;
     public static final Block DEAD_RICE;
+
+    public static final Block STEAMED_RICE;
     
-    public static final Block KEG;
+    public static final Block CASK;
         
     public static final Block SULFUR_STICK;
     
@@ -63,10 +65,12 @@ public class TsBlocks {
         DEAD_GRAPE = registerItemless("dead_grape", new Block(FabricBlockSettings.of(Material.LEAVES).nonOpaque().noCollision()));
         DEAD_HOPS = registerItemless("dead_hops", new Block(FabricBlockSettings.of(Material.LEAVES).nonOpaque().noCollision()));
         DEAD_RICE = registerItemless("dead_rice", new Block(FabricBlockSettings.of(Material.LEAVES).nonOpaque().noCollision()));
+
+        STEAMED_RICE = registerItemless("steamed_rice", new SteamedRiceBlock(FabricBlockSettings.of(Material.WOOD).nonOpaque().breakInstantly().ticksRandomly()));
         
-        KEG = register("keg", new KegBlock(FabricBlockSettings.of(Material.WOOD).strength(4.0f)));
+        CASK = registerItemless("cask", new CaskBlock(FabricBlockSettings.of(Material.WOOD).strength(4.0f)));
         
-        SULFUR_STICK = register("sulfur_stick", new SulfurStick(FabricBlockSettings.of(Material.STONE).breakInstantly()));
+        SULFUR_STICK = registerItemless("sulfur_stick", new SulfurStick(FabricBlockSettings.of(Material.STONE).breakInstantly()));
     }
     
     public static void init() {

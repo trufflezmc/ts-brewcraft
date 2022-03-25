@@ -1,5 +1,6 @@
 package com.trufflez.tsbrewcraft;
 
+import com.trufflez.tsbrewcraft.block.TsBlockEntities;
 import com.trufflez.tsbrewcraft.block.TsBlocks;
 import com.trufflez.tsbrewcraft.item.TsItems;
 import com.trufflez.tsbrewcraft.statuseffect.TsStatusEffects;
@@ -19,6 +20,8 @@ public class TsBrewcraft implements ModInitializer {
 		
 		TsItems.init();
 		TsBlocks.init();
+
+		TsBlockEntities.init();
 
 		PropertyRegistry.init();
 
