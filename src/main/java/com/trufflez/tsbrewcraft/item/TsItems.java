@@ -16,6 +16,7 @@ public class TsItems {
     public static final Item AGAVE;
     public static final Item BARLEY;
     public static final Item PALE_MALT;
+    public static final Item DARK_MALT;
     public static final Item HOPS;
     public static final Item RICE;
     public static final Item STEAMED_RICE;
@@ -108,13 +109,14 @@ public class TsItems {
         AGAVE = register("agave", new TsAliasedBlockItem(TsBlocks.AGAVE, settings()));
         BARLEY = register("barley", new TsAliasedBlockItem(TsBlocks.BARLEY, settings()));
         PALE_MALT = register("pale_malt");
+        DARK_MALT = register("dark_malt");
         HOPS = register("hops");
         RICE = register("rice", new TsAliasedBlockItem(TsBlocks.RICE, settings()));
-        STEAMED_RICE = register("steamed_rice", TsConsumables.STEAMED_RICE);
-        MOLDY_RICE = register("moldy_rice", TsConsumables.MOLDY_RICE);
+        STEAMED_RICE = register("steamed_rice", new TsAliasedBlockItem(TsBlocks.STEAMED_RICE, settings().food(TsConsumables.STEAMED_RICE)));
+        MOLDY_RICE = register("moldy_rice", new TsAliasedBlockItem(TsBlocks.MOLDY_RICE, settings().food(TsConsumables.MOLDY_RICE)));
         GRAPES = register("grapes", TsConsumables.GRAPES);
         GRAPE_SEEDS = register("grape_seeds", new TsAliasedBlockItem(TsBlocks.GRAPE, settings()));
-        CORN = register("corn", new TsAliasedBlockItem(TsBlocks.CORN, settings()));
+        CORN = register("corn", new TsAliasedBlockItem(TsBlocks.YOUNG_CORN, settings()));
         STEAMED_CORN = register("steamed_corn", TsConsumables.STEAMED_CORN);
         CORN_SUGAR = register("corn_sugar");
                 
@@ -136,7 +138,7 @@ public class TsItems {
         SHOCHU = register("shochu", TsConsumables.SHOCHU, 4, 40);
         MOONSHINE = register("moonshine", TsConsumables.MOONSHINE, 1, 90);
 
-        KEFIR = register("vinegar", TsConsumables.VINEGAR, 3, 0);
+        KEFIR = register("kefir", TsConsumables.KEFIR, 3, 0);
         VINEGAR = register("vinegar", TsConsumables.VINEGAR, 1, 0);
         CRAPPY_BEER = register("crappy_beer", TsConsumables.CRAPPY_BEER, 2, 3);
         CRAPPY_WINE = register("crappy_wine", TsConsumables.CRAPPY_WINE, 2, 12);

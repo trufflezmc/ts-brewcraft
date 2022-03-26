@@ -18,6 +18,7 @@ public class TsBlocks {
     public static final Block AGAVE;
     public static final Block BARLEY;
     public static final Block CORN;
+    public static final Block YOUNG_CORN;
     public static final Block GRAPE;
     public static final Block HOPS;
     public static final Block RICE;
@@ -30,7 +31,8 @@ public class TsBlocks {
     public static final Block DEAD_RICE;
 
     public static final Block STEAMED_RICE;
-    
+    public static final Block MOLDY_RICE;
+        
     public static final Block CASK;
         
     public static final Block SULFUR_STICK;
@@ -52,21 +54,23 @@ public class TsBlocks {
     }
     
     static {
-        AGAVE = registerItemless("agave_plant", new Block(FabricBlockSettings.of(Material.LEAVES).nonOpaque().breakInstantly()));
+        AGAVE = registerItemless("agave_plant", new Block(FabricBlockSettings.of(Material.PLANT).nonOpaque().breakInstantly()));
         BARLEY = registerItemless("barley_plant", new BarleyCropBlock(FabricBlockSettings.copy(Blocks.WHEAT).nonOpaque().noCollision()));
-        CORN = registerItemless("corn_plant", new CornCropBlock(FabricBlockSettings.of(Material.LEAVES).nonOpaque().noCollision().breakInstantly()));
+        CORN = registerItemless("corn_plant", new CornCropBlockTall(FabricBlockSettings.of(Material.PLANT).nonOpaque().noCollision().breakInstantly().ticksRandomly()));
+        YOUNG_CORN = registerItemless("young_corn_plant", new CornCropBlock(FabricBlockSettings.copy(Blocks.WHEAT).nonOpaque().noCollision().breakInstantly().ticksRandomly()));
         GRAPE = registerItemless("grape_plant", new Block(FabricBlockSettings.of(Material.LEAVES).nonOpaque().strength(4.0f)));
         HOPS = registerItemless("hops_plant", new HopsCropBlock(FabricBlockSettings.of(Material.LEAVES).nonOpaque().strength(2.0f)));
-        RICE = registerItemless("rice_plant", new RiceCropBlock(FabricBlockSettings.copy(Blocks.WHEAT).nonOpaque().noCollision()));
+        RICE = registerItemless("rice_plant", new RiceCropBlock(FabricBlockSettings.of(Material.PLANT).nonOpaque().noCollision()));
 
-        DEAD_AGAVE = registerItemless("dead_agave", new Block(FabricBlockSettings.of(Material.LEAVES).nonOpaque().noCollision()));
-        DEAD_BARLEY = registerItemless("dead_barley", new Block(FabricBlockSettings.of(Material.LEAVES).nonOpaque().noCollision()));
-        DEAD_CORN = registerItemless("dead_corn", new Block(FabricBlockSettings.of(Material.LEAVES).nonOpaque().noCollision()));
-        DEAD_GRAPE = registerItemless("dead_grape", new Block(FabricBlockSettings.of(Material.LEAVES).nonOpaque().noCollision()));
-        DEAD_HOPS = registerItemless("dead_hops", new Block(FabricBlockSettings.of(Material.LEAVES).nonOpaque().noCollision()));
-        DEAD_RICE = registerItemless("dead_rice", new Block(FabricBlockSettings.of(Material.LEAVES).nonOpaque().noCollision()));
+        DEAD_AGAVE = registerItemless("dead_agave", new Block(FabricBlockSettings.of(Material.PLANT).nonOpaque().noCollision()));
+        DEAD_BARLEY = registerItemless("dead_barley", new Block(FabricBlockSettings.of(Material.PLANT).nonOpaque().noCollision()));
+        DEAD_CORN = registerItemless("dead_corn", new Block(FabricBlockSettings.of(Material.PLANT).nonOpaque().noCollision()));
+        DEAD_GRAPE = registerItemless("dead_grape", new Block(FabricBlockSettings.of(Material.PLANT).nonOpaque().noCollision()));
+        DEAD_HOPS = registerItemless("dead_hops", new Block(FabricBlockSettings.of(Material.PLANT).nonOpaque().noCollision()));
+        DEAD_RICE = registerItemless("dead_rice", new Block(FabricBlockSettings.of(Material.PLANT).nonOpaque().noCollision()));
 
         STEAMED_RICE = registerItemless("steamed_rice", new SteamedRiceBlock(FabricBlockSettings.of(Material.WOOD).nonOpaque().breakInstantly().ticksRandomly()));
+        MOLDY_RICE = registerItemless("moldy_rice", new Block(FabricBlockSettings.of(Material.WOOD).nonOpaque().breakInstantly()));
         
         CASK = registerItemless("cask", new CaskBlock(FabricBlockSettings.of(Material.WOOD).strength(4.0f)));
         

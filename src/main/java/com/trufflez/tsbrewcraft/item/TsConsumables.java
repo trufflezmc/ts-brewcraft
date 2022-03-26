@@ -28,6 +28,7 @@ public class TsConsumables {
     public static final FoodComponent MOONSHINE;
     
     public static final FoodComponent VINEGAR;
+    public static final FoodComponent KEFIR;
     public static final FoodComponent CRAPPY_BEER;
     public static final FoodComponent CRAPPY_WINE;
     public static final FoodComponent STRANGE_WINE;
@@ -65,6 +66,7 @@ public class TsConsumables {
         MOONSHINE = drink(2).build();
         
         VINEGAR = drink(1).build();
+        KEFIR = drink(1).build();
         CRAPPY_BEER = drink(2).build();
         CRAPPY_WINE = drink(4).build();
         STRANGE_WINE = drink(2).build();

@@ -33,7 +33,10 @@ public class Tooltips {
         if(i==TsItems.WHISKEY) tooltip.add(tooltip("whiskey"));
         if(i==TsItems.BOURBON) tooltip.add(tooltip("bourbon"));
         if(i==TsItems.SHOCHU) tooltip.add(tooltip("shochu"));
-        if(i==TsItems.MOONSHINE) tooltip.add(tooltip("moonshine")); tooltip.add(tooltip("moonshine2"));
+        if(i==TsItems.MOONSHINE) {
+            tooltip.add(tooltip("moonshine"));
+            tooltip.add(tooltip("moonshine2"));
+        }
         if(i==TsItems.KEFIR) tooltip.add(tooltip("kefir"));
         if(i==TsItems.VINEGAR) tooltip.add(tooltip("vinegar"));
         if(i==TsItems.CRAPPY_BEER) tooltip.add(tooltip("crappy_beer"));
