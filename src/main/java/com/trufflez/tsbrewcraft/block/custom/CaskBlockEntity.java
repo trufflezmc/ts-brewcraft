@@ -6,7 +6,14 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.math.BlockPos;
 
+import java.sql.Time;
+
 public class CaskBlockEntity extends BlockEntity {
+    
+    
+    private Integer TimeSinceSulfured;
+    
+    
     public CaskBlockEntity(BlockPos pos, BlockState state) {
         super(TsBlockEntities.CASK_BLOCKENTITY, pos, state);
     }
@@ -22,7 +29,10 @@ public class CaskBlockEntity extends BlockEntity {
     
     @Override
     public void writeNbt(NbtCompound nbt) {
+        
+        
+        nbt.putInt("TimeSinceSulfured", TimeSinceSulfured);
+        
         super.writeNbt(nbt);
-        //return nbt;
     }
 }

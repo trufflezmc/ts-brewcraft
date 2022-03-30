@@ -43,8 +43,12 @@ public class CaskBlock extends BlockWithEntity implements BlockEntityProvider {
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (!world.isClient) {
-            // do what we need to propogate on multiplayer
+            // do what we need to propagate on multiplayer
             
+            BlockEntity blockEntity = world.getBlockEntity(pos);
+            if (blockEntity instanceof CaskBlockEntity) {
+                
+            }
         }
 
         if (world.isClient) {

@@ -35,6 +35,26 @@ public class RiceCropBlock extends CropBlock implements Waterloggable {
         super(settings);
         this.setDefaultState((BlockState)((BlockState)this.stateManager.getDefaultState()).with(this.getAgeProperty(), 0).with(WATERLOGGED, false));
     }
+
+    @Override
+    public BlockState getPlacementState(ItemPlacementContext ctx) {
+        BlockPos blockPos = ctx.getBlockPos();
+        FluidState fluidState = ctx.getWorld().getFluidState(blockPos);
+        return (BlockState)this.getDefaultState().with(WATERLOGGED, fluidState.getFluid() == Fluids.WATER);
+    }
+
+    @Override
+    public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
+        if (!state.canPlaceAt(world, pos)) {
+            return Blocks.AIR.getDefaultState(); // break block if invalid placement
+        } else { // if valid, 
+            if ((Boolean)state.get(WATERLOGGED)) { // update water tick if waterlogged
+                world.createAndScheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
+            }
+
+            return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
+        }
+    }
     
     @Override
     public ItemConvertible getSeedsItem() {
@@ -43,14 +63,14 @@ public class RiceCropBlock extends CropBlock implements Waterloggable {
     
     @Override
     protected boolean canPlantOnTop(BlockState floor, BlockView world, BlockPos pos) {
-        return floor.isOf(Blocks.DIRT); // TODO: add mud for 1.19
+        //return floor.isOf(Blocks.DIRT); // TODO: add mud for 1.19
+        return true;
     }
-    
-    // May need to override getAvailableMoisture
     
     @Override
     public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
-        return true;
+        BlockPos blockPos = pos.down();
+        return this.canPlantOnTop(world.getBlockState(blockPos), world, blockPos);
     }
 
     @Override
@@ -62,50 +82,38 @@ public class RiceCropBlock extends CropBlock implements Waterloggable {
                 //float f = getAvailableMoisture(this, world, pos);
                 if (random.nextInt(24) == 0) {
                     if (waterlogged) {
-                        world.setBlockState(pos, this.withAge(i + 1).with(WATERLOGGED, waterlogged), 2);
+                        growRice(state, world, pos);
                     } else {
-                        world.setBlockState(pos, TsBlocks.DEAD_RICE.getDefaultState());
+                        killRice(state, world, pos);
                     }
                 }
             } else if (i < this.getMaxAge()) {
                 if (random.nextInt(24) == 0) {
                     if (!waterlogged) {
-                        world.setBlockState(pos, this.withAge(i + 1).with(WATERLOGGED, waterlogged), 2);
+                        growRice(state, world, pos);
                     } else {
-                        world.setBlockState(pos, TsBlocks.DEAD_RICE.getDefaultState());
+                        killRice(state, world, pos);
                     }
                 }
             }
         }
     }
     
-    /*@Override
-    public FluidState getFluidState(BlockState state) {
-        return (Boolean)state.get(WATERLOGGED) ? Fluids.WATER.getStill(false) : super.getFluidState(state);
-    }*/
-
-    public IntProperty getAgeProperty() {
-        return AGE;
+    private void growRice(BlockState state,  ServerWorld world,  BlockPos pos) {
+        world.setBlockState(pos, this.withAge(this.getAge(state) + 1).with(WATERLOGGED, state.get(WATERLOGGED)), 2);
     }
-
-    @Override
-    public BlockState getPlacementState(ItemPlacementContext ctx) {
-        BlockPos blockPos = ctx.getBlockPos();
-        FluidState fluidState = ctx.getWorld().getFluidState(blockPos);
-        return (BlockState)this.getDefaultState().with(WATERLOGGED, fluidState.getFluid() == Fluids.WATER);
+    
+    private void killRice(BlockState state,  ServerWorld world,  BlockPos pos) {
+        world.setBlockState(pos, TsBlocks.DEAD_RICE.getDefaultState().with(WATERLOGGED, state.get(WATERLOGGED)));
     }
     
     @Override
-    public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
-        if ((Boolean)state.get(WATERLOGGED)) {
-            world.createAndScheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
-        }
-        
-        if (!world.isClient()) {
-            world.createAndScheduleBlockTick(pos, this, 1);
-        }
-        
-        return state;
+    public FluidState getFluidState(BlockState state) {
+        return (Boolean)state.get(WATERLOGGED) ? Fluids.WATER.getStill(false) : super.getFluidState(state);
+    }
+
+    public IntProperty getAgeProperty() {
+        return AGE;
     }
     
     public int getMaxAge() {

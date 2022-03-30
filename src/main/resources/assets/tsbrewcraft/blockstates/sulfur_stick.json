@@ -1,5 +1,10 @@
 {
   "variants": {
-    "": {"model": "tsbrewcraft:block/sulfur_stick"}
+    "lit=false": {
+      "model": "tsbrewcraft:block/sulfur_stick"
+    },
+    "lit=true": {
+      "model": "tsbrewcraft:block/sulfur_stick"
+    }
   }
 }

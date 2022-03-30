@@ -8,6 +8,7 @@ import com.trufflez.tsbrewcraft.item.patches.TsAliasedBlockItem;
 import com.trufflez.tsbrewcraft.item.patches.TsItem;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.item.*;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
@@ -157,7 +158,7 @@ public class TsItems {
         // BlockItems, registered here for tooltips
         
         CASK = register("cask", TsBlocks.CASK);
-        SULFUR_STICK = register("sulfur_stick", TsBlocks.SULFUR_STICK);
+        SULFUR_STICK = register("sulfur_stick", new WallStandingBlockItem(TsBlocks.SULFUR_STICK, TsBlocks.WALL_SULFUR_STICK, settings()));
     }
     
     public static void init() {

@@ -10,6 +10,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.Material;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
@@ -36,6 +37,7 @@ public class TsBlocks {
     public static final Block CASK;
         
     public static final Block SULFUR_STICK;
+    public static final Block WALL_SULFUR_STICK;
     
     // Register shortcuts
 
@@ -62,19 +64,20 @@ public class TsBlocks {
         HOPS = registerItemless("hops_plant", new HopsCropBlock(FabricBlockSettings.of(Material.LEAVES).nonOpaque().strength(2.0f)));
         RICE = registerItemless("rice_plant", new RiceCropBlock(FabricBlockSettings.of(Material.PLANT).nonOpaque().noCollision()));
 
-        DEAD_AGAVE = registerItemless("dead_agave", new Block(FabricBlockSettings.of(Material.PLANT).nonOpaque().noCollision()));
-        DEAD_BARLEY = registerItemless("dead_barley", new Block(FabricBlockSettings.of(Material.PLANT).nonOpaque().noCollision()));
-        DEAD_CORN = registerItemless("dead_corn", new Block(FabricBlockSettings.of(Material.PLANT).nonOpaque().noCollision()));
-        DEAD_GRAPE = registerItemless("dead_grape", new Block(FabricBlockSettings.of(Material.PLANT).nonOpaque().noCollision()));
-        DEAD_HOPS = registerItemless("dead_hops", new Block(FabricBlockSettings.of(Material.PLANT).nonOpaque().noCollision()));
-        DEAD_RICE = registerItemless("dead_rice", new Block(FabricBlockSettings.of(Material.PLANT).nonOpaque().noCollision()));
+        DEAD_AGAVE = registerItemless("dead_agave", new DeadCropBlock(FabricBlockSettings.of(Material.PLANT).nonOpaque().noCollision()));
+        DEAD_BARLEY = registerItemless("dead_barley", new DeadCropBlock(FabricBlockSettings.of(Material.PLANT).nonOpaque().noCollision()));
+        DEAD_CORN = registerItemless("dead_corn", new DeadCropBlock(FabricBlockSettings.of(Material.PLANT).nonOpaque().noCollision()));
+        DEAD_GRAPE = registerItemless("dead_grape", new DeadCropBlock(FabricBlockSettings.of(Material.PLANT).nonOpaque().noCollision()));
+        DEAD_HOPS = registerItemless("dead_hops", new DeadCropBlock(FabricBlockSettings.of(Material.PLANT).nonOpaque().noCollision()));
+        DEAD_RICE = registerItemless("dead_rice", new DeadCropBlock(FabricBlockSettings.of(Material.PLANT).nonOpaque().noCollision()));
 
         STEAMED_RICE = registerItemless("steamed_rice", new SteamedRiceBlock(FabricBlockSettings.of(Material.WOOD).nonOpaque().breakInstantly().ticksRandomly()));
         MOLDY_RICE = registerItemless("moldy_rice", new Block(FabricBlockSettings.of(Material.WOOD).nonOpaque().breakInstantly()));
         
         CASK = registerItemless("cask", new CaskBlock(FabricBlockSettings.of(Material.WOOD).strength(4.0f)));
         
-        SULFUR_STICK = registerItemless("sulfur_stick", new SulfurStick(FabricBlockSettings.of(Material.STONE).breakInstantly()));
+        SULFUR_STICK = registerItemless("sulfur_stick", new SulfurStick(FabricBlockSettings.of(Material.WOOD).nonOpaque().noCollision().breakInstantly()));
+        WALL_SULFUR_STICK = registerItemless("wall_sulfur_stick", new WallSulfurStick(FabricBlockSettings.of(Material.WOOD).nonOpaque().noCollision().breakInstantly()));
     }
     
     public static void init() {

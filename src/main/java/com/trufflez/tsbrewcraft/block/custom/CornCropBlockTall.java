@@ -1,16 +1,21 @@
 package com.trufflez.tsbrewcraft.block.custom;
 
 import com.trufflez.tsbrewcraft.block.TsBlocks;
+import com.trufflez.tsbrewcraft.item.TsItems;
 import net.minecraft.block.*;
 import net.minecraft.block.enums.DoubleBlockHalf;
+import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.EnumProperty;
 import net.minecraft.state.property.IntProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldAccess;
 
 import java.util.Random;
 
@@ -22,6 +27,22 @@ public class CornCropBlockTall extends TallPlantBlock implements Fertilizable {
     public CornCropBlockTall(Settings settings) {
         super(settings);
         this.setDefaultState((BlockState)((BlockState)this.stateManager.getDefaultState()).with(HALF, DoubleBlockHalf.LOWER).with(AGE, 0));
+    }
+    
+    @Override
+    public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
+        DoubleBlockHalf doubleBlockHalf = (DoubleBlockHalf)state.get(HALF);
+        if (direction.getAxis() == Direction.Axis.Y 
+                && doubleBlockHalf == DoubleBlockHalf.LOWER == (direction == Direction.UP)
+                && (!(neighborState.isOf(this) || neighborState.isOf(TsBlocks.YOUNG_CORN)) || neighborState.get(HALF) == doubleBlockHalf)) {
+            return Blocks.AIR.getDefaultState();
+        } else {
+            return doubleBlockHalf == DoubleBlockHalf.LOWER
+                    && direction == Direction.DOWN
+                    && !state.canPlaceAt(world, pos) ? Blocks.AIR.getDefaultState() : super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
+        }
+        //return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
+        //return state;
     }
 
     @Override
@@ -39,20 +60,24 @@ public class CornCropBlockTall extends TallPlantBlock implements Fertilizable {
         return OffsetType.NONE;
     }
     
-    /*@Override
-    public ItemConvertible getSeedsItem() {
-        return TsItems.CORN;
-    }*/
+    @Override // identical to "getSeedsItem" extending CropBlock
+    public ItemStack getPickStack(BlockView world, BlockPos pos, BlockState state) {
+        return new ItemStack(TsItems.CORN);
+    }
 
     @Override
     public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
-        this.grow(world, pos);
+        int growthAmount = this.getAge(state) + MathHelper.nextInt(world.random, 2, 5);
+        growthAmount = Math.max(growthAmount, MAX_AGE);
+        
+        setGrowth(world, pos, state, growthAmount);
     }
     
-    protected void grow(World world, BlockPos pos) {
-        world.setBlockState(pos, (BlockState)
-                        TsBlocks.CORN.getDefaultState(),
-                3);
+    private void setGrowth(ServerWorld world, BlockPos pos, BlockState state, int growthAmount) {
+        if (this.getAge(state) < MAX_AGE && state.get(HALF) == DoubleBlockHalf.LOWER) {
+            world.setBlockState(pos, this.withAge(growthAmount), 2); // flags was 3
+            world.setBlockState(pos.up(1), this.withAge(growthAmount).with(HALF, DoubleBlockHalf.UPPER), 2);
+        }
     }
 
     // This has protected access, so we have to remake it here
@@ -78,8 +103,10 @@ public class CornCropBlockTall extends TallPlantBlock implements Fertilizable {
                 f += g;
             }
         }
-
-        BlockPos blockPos2 = pos.north();
+        
+        // This is the logic for making crops grow slower if they're not planted in rows.
+        
+        /*BlockPos blockPos2 = pos.north();
         BlockPos blockPos3 = pos.south();
         BlockPos blockPos4 = pos.west();
         BlockPos blockPos5 = pos.east();
@@ -92,7 +119,7 @@ public class CornCropBlockTall extends TallPlantBlock implements Fertilizable {
             if (bl3) {
                 f /= 2.0F;
             }
-        }
+        }*/
 
         return f;
     }
@@ -104,13 +131,17 @@ public class CornCropBlockTall extends TallPlantBlock implements Fertilizable {
             if (i < this.getMaxAge()) {
                 float f = getAvailableMoisture(this, world, pos);
                 if (random.nextInt((int)(25.0F / f) + 1) == 0) {
-                    world.setBlockState(pos, this.withAge(i + 1), 2);
-                    world.setBlockState(pos.up(), this.withAge(i + 1).with(HALF, DoubleBlockHalf.UPPER), 2);
+                    this.setGrowth(world, pos, state, i + 1);
                 }
             }
         }
     }
-
+    
+    @Override
+    public boolean hasRandomTicks(BlockState state) {
+        return state.get(AGE) < MAX_AGE; // Tick only when able to tick
+    }
+    
     public IntProperty getAgeProperty() {
         return AGE;
     }
@@ -122,7 +153,7 @@ public class CornCropBlockTall extends TallPlantBlock implements Fertilizable {
     protected int getAge(BlockState state) {
         return (Integer)state.get(this.getAgeProperty());
     }
-
+    
     public BlockState withAge(int age) {
         return (BlockState)this.getDefaultState().with(this.getAgeProperty(), age);
     }

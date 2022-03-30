@@ -1,13 +1,16 @@
 package com.trufflez.tsbrewcraft.block.custom;
 
 import com.trufflez.tsbrewcraft.block.TsBlocks;
+import com.trufflez.tsbrewcraft.item.TsItems;
 import net.minecraft.block.*;
 import net.minecraft.block.enums.DoubleBlockHalf;
+import net.minecraft.item.ItemConvertible;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.IntProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
@@ -31,21 +34,31 @@ public class CornCropBlock extends CropBlock implements Fertilizable {
         return world.getBlockState(pos.up()).isAir();
     }
     
-    /*@Override
+    @Override
     public ItemConvertible getSeedsItem() {
         return TsItems.CORN;
-    }*/
-
-    /*@Override
-    public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
-        this.grow(world, pos);
     }
-    
-    protected void grow(World world, BlockPos pos) {
-        world.setBlockState(pos, (BlockState)
-                        TsBlocks.CORN.getDefaultState(),
-                3);
-    }*/
+
+    @Override
+    public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
+        int growthAmount = MathHelper.nextInt(world.random, 2, 5);
+        int age = this.getAge(state) + growthAmount;
+        if (age > MAX_AGE) {
+            int maxMaxAge = CornCropBlockTall.MAX_AGE;
+            if (age > (MAX_AGE + maxMaxAge)) {
+                world.setBlockState(pos, TsBlocks.CORN.getDefaultState().with(AGE, maxMaxAge), 3);
+                world.setBlockState(pos.up(1), TsBlocks.CORN.getDefaultState().with(AGE, maxMaxAge).with(HALF, DoubleBlockHalf.UPPER), 3);
+            } else {
+                world.setBlockState(pos, TsBlocks.CORN.getDefaultState().with(AGE, age), 3);
+                world.setBlockState(pos.up(1), TsBlocks.CORN.getDefaultState().with(AGE, age).with(HALF, DoubleBlockHalf.UPPER), 3);
+            }
+        } else {
+            world.setBlockState(pos, TsBlocks.YOUNG_CORN.getDefaultState().with(AGE, age), 3);
+        }
+
+        world.setBlockState(pos, TsBlocks.CORN.getDefaultState().with(AGE, age), 3);
+        world.setBlockState(pos.up(1), TsBlocks.CORN.getDefaultState().with(AGE, age).with(HALF, DoubleBlockHalf.UPPER), 3);
+    }
 
     @Override // Overriding so "fully grown" block can advance to next growth stage. TODO: optimize for tick lag
     public boolean hasRandomTicks(BlockState state) {
