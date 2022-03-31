@@ -10,7 +10,7 @@ import net.minecraft.util.registry.Registry;
 
 public class TsBlockEntities {
     public static final BlockEntityType<CaskBlockEntity> CASK_BLOCKENTITY;
-
+    
     private static <T extends BlockEntity> BlockEntityType<T> register(String id, BlockEntityType<T> blockEntityType) {
         return Registry.register(Registry.BLOCK_ENTITY_TYPE, new Identifier(TsBrewcraft.MOD_ID, id), blockEntityType);
     }

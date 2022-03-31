@@ -112,7 +112,8 @@
   "tooltip.tsbrewcraft.wine_thief": "",
   "tooltip.tsbrewcraft.maltov_cocktail": "You wouldn't want to drink this.",
   
-  
   "effect.tsbrewcraft.tipsy": "Tipsy",
-  "effect.tsbrewcraft.drunk": "Drunk"
+  "effect.tsbrewcraft.drunk": "Drunk",
+  
+  "message.tsbrewcraft.caskfull": "The cask is full."
 }
