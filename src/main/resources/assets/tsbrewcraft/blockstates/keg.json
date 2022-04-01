@@ -1,5 +1,114 @@
 {
   "variants": {
-    "": {"model": "tsarcanum:block/keg"}
+    "facing=down,sulfur=false,sealed=false": {
+      "model": "tsbrewcraft:block/keg",
+      "x": 180
+    },
+    "facing=down,sulfur=true,sealed=false": {
+      "model": "tsbrewcraft:block/keg_sulfur_bottom",
+      "x": 180
+    },
+    "facing=down,sulfur=false,sealed=true": {
+      "model": "tsbrewcraft:block/keg_sealed",
+      "x": 180
+    },
+    "facing=down,sulfur=true,sealed=true": {
+      "model": "tsbrewcraft:block/keg_sealed",
+      "x": 180
+    },
+
+    "facing=up,sulfur=false,sealed=false": {
+      "model": "tsbrewcraft:block/keg"
+    },
+    "facing=up,sulfur=true,sealed=false": {
+      "model": "tsbrewcraft:block/keg_sulfur_bottom"
+    },
+    "facing=up,sulfur=false,sealed=true": {
+      "model": "tsbrewcraft:block/keg_sealed"
+    },
+    "facing=up,sulfur=true,sealed=true": {
+      "model": "tsbrewcraft:block/keg_sealed"
+    },
+    
+    "facing=east,sulfur=false,sealed=false": {
+      "model": "tsbrewcraft:block/keg",
+      "y": 90,
+      "x": 90
+    },
+    "facing=east,sulfur=true,sealed=false": {
+      "model": "tsbrewcraft:block/keg_sulfur_side",
+      "y": 90,
+      "x": 90
+    },
+    "facing=east,sulfur=false,sealed=true": {
+      "model": "tsbrewcraft:block/keg_sealed",
+      "y": 90,
+      "x": 90
+    },
+    "facing=east,sulfur=true,sealed=true": {
+      "model": "tsbrewcraft:block/keg_sealed",
+      "y": 90,
+      "x": 90
+    },
+
+
+    "facing=north,sulfur=false,sealed=false": {
+      "model": "tsbrewcraft:block/keg",
+      "x": 90
+    },
+    "facing=north,sulfur=true,sealed=false": {
+      "model": "tsbrewcraft:block/keg_sulfur_side",
+      "x": 90
+    },
+    "facing=north,sulfur=false,sealed=true": {
+      "model": "tsbrewcraft:block/keg_sealed",
+      "x": 90
+    },
+    "facing=north,sulfur=true,sealed=true": {
+      "model": "tsbrewcraft:block/keg_sealed",
+      "x": 90
+    },
+    
+    "facing=south,sulfur=false,sealed=false": {
+      "model": "tsbrewcraft:block/keg",
+      "y": 180,
+      "x": 90
+    },
+    "facing=south,sulfur=true,sealed=false": {
+      "model": "tsbrewcraft:block/keg_sulfur_side",
+      "y": 180,
+      "x": 90
+    },
+    "facing=south,sulfur=false,sealed=true": {
+      "model": "tsbrewcraft:block/keg_sealed",
+      "y": 180,
+      "x": 90
+    },
+    "facing=south,sulfur=true,sealed=true": {
+      "model": "tsbrewcraft:block/keg_sealed",
+      "y": 180,
+      "x": 90
+    },
+    
+    "facing=west,sulfur=false,sealed=false": {
+      "model": "tsbrewcraft:block/keg",
+      "y": 270,
+      "x": 90
+    },
+    "facing=west,sulfur=true,sealed=false": {
+      "model": "tsbrewcraft:block/keg_sulfur_side",
+      "y": 270,
+      "x": 90
+    },
+    "facing=west,sulfur=false,sealed=true": {
+      "model": "tsbrewcraft:block/keg_sealed",
+      "y": 270,
+      "x": 90
+    },
+    "facing=west,sulfur=true,sealed=true": {
+      "model": "tsbrewcraft:block/keg_sealed",
+      "y": 270,
+      "x": 90
+    }
   }
 }

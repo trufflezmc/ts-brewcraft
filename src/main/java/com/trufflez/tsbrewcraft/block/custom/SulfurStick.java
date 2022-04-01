@@ -70,7 +70,7 @@ public class SulfurStick extends Block {
         }
     }
 
-    private static boolean canLightWith(ItemStack stack) {
+    public static boolean canLightWith(ItemStack stack) {
         return stack.isOf(Items.FLINT_AND_STEEL) || stack.isOf(Items.FIRE_CHARGE) || stack.isOf(Items.TORCH);
     }
 

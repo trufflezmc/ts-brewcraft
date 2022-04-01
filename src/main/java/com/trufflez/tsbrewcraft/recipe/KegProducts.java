@@ -1,10 +1,6 @@
 package com.trufflez.tsbrewcraft.recipe;
 
-import com.trufflez.tsbrewcraft.item.TsItems;
-import net.minecraft.item.Item;
-import net.minecraft.item.Items;
-
-public enum CaskProducts {
+public enum KegProducts {
     NONE,
     BEER,
     WHEAT_BEER,

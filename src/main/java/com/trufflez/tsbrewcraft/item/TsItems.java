@@ -65,7 +65,7 @@ public class TsItems {
     
     // BlockItems, registered here for tooltips
 
-    public static final Item CASK;
+    public static final Item KEG;
     public static final Item SULFUR_STICK;
     
     //private static BlockItem blockItem(Block block) { return new BlockItem(block, new FabricItemSettings().group(TsItemGroups.MAIN)); }
@@ -157,7 +157,7 @@ public class TsItems {
         
         // BlockItems, registered here for tooltips
         
-        CASK = register("cask", TsBlocks.CASK);
+        KEG = register("keg", TsBlocks.KEG);
         SULFUR_STICK = register("sulfur_stick", new WallStandingBlockItem(TsBlocks.SULFUR_STICK, TsBlocks.WALL_SULFUR_STICK, settings()));
     }
     

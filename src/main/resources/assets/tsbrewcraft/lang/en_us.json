@@ -102,8 +102,8 @@
   "tooltip.tsbrewcraft.crappy_wine": "Maybe leave in the cellar for now.",
   "tooltip.tsbrewcraft.strange_wine": "...I guess?",
   
-  "tooltip.tsbrewcraft.cask": "",
-  "tooltip.tsbrewcraft.sulfur_stick": "Disinfects casks.",
+  "tooltip.tsbrewcraft.keg": "",
+  "tooltip.tsbrewcraft.sulfur_stick": "Disinfects kegs.",
   "tooltip.tsbrewcraft.beer_bottle": "",
   "tooltip.tsbrewcraft.wine_bottle": "",
   "tooltip.tsbrewcraft.cork": "",
@@ -115,5 +115,5 @@
   "effect.tsbrewcraft.tipsy": "Tipsy",
   "effect.tsbrewcraft.drunk": "Drunk",
   
-  "message.tsbrewcraft.caskfull": "The cask is full."
+  "message.tsbrewcraft.kegfull": "The keg is full."
 }

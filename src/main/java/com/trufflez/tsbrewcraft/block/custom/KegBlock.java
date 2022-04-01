@@ -2,14 +2,13 @@ package com.trufflez.tsbrewcraft.block.custom;
 
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.enums.WallMountLocation;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.DirectionProperty;
-import net.minecraft.state.property.EnumProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.ActionResult;
@@ -20,66 +19,25 @@ import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldView;
 import org.jetbrains.annotations.Nullable;
 
-public class CaskBlock extends BlockWithEntity implements BlockEntityProvider {
-    public static final EnumProperty<WallMountLocation> FACE;
+public class KegBlock extends BlockWithEntity implements BlockEntityProvider {
     public static final DirectionProperty FACING;
-    public static BooleanProperty OPEN;
+    public static BooleanProperty SULFUR;
+    public static BooleanProperty SEALED;
     
-    public CaskBlock(Settings settings) {
+    public KegBlock(Settings settings) {
         super(settings);
-    }
-    
-    @Override
-    public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
-        return canPlaceAt(world, pos, getDirection(state).getOpposite());
-    }
-
-
-    public static boolean canPlaceAt(WorldView world, BlockPos pos, Direction direction) {
-        BlockPos blockPos = pos.offset(direction);
-        return world.getBlockState(blockPos).isSideSolidFullSquare(world, blockPos, direction.getOpposite());
-    }
-
-    @Nullable
-    public BlockState getPlacementState(ItemPlacementContext ctx) {
-        Direction[] var2 = ctx.getPlacementDirections();
-        int var3 = var2.length;
-
-        for(int var4 = 0; var4 < var3; ++var4) {
-            Direction direction = var2[var4];
-            BlockState blockState;
-            if (direction.getAxis() == Direction.Axis.Y) {
-                blockState = this.getDefaultState().with(FACE, direction == Direction.UP ? WallMountLocation.CEILING : WallMountLocation.FLOOR).with(FACING, ctx.getPlayerFacing());
-            } else {
-                blockState = this.getDefaultState().with(FACE, WallMountLocation.WALL).with(FACING, direction.getOpposite());
-            }
-
-            if (blockState.canPlaceAt(ctx.getWorld(), ctx.getBlockPos())) {
-                return blockState;
-            }
-        }
-
-        return null;
-    }
-
-    private static Direction getDirection(BlockState state) {
-        switch(state.get(FACE)) {
-            case CEILING:
-                return Direction.DOWN;
-            case FLOOR:
-                return Direction.UP;
-            default:
-                return state.get(FACING);
-        }
+        this.setDefaultState(this.getDefaultState()
+                .with(FACING, Direction.UP)
+                .with(SULFUR, false)
+                .with(SEALED, false));
     }
     
     @Nullable
     @Override
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-        return new CaskBlockEntity(pos, state);
+        return new KegBlockEntity(pos, state);
     }
     
     // archaic and possibly unnecessary code
@@ -99,28 +57,40 @@ public class CaskBlock extends BlockWithEntity implements BlockEntityProvider {
         if (!world.isClient) {
             BlockEntity blockEntity = world.getBlockEntity(pos);
             
-            if (blockEntity instanceof CaskBlockEntity caskBlockEntity) {
+            if (blockEntity instanceof KegBlockEntity kegBlockEntity) {
                 ItemStack item = player.getStackInHand(hand);
                 
-                if (item.isEmpty()) { // empty hand
-                    boolean opened = caskBlockEntity.getOpenedState();
+                if (item.isEmpty()) { // Seal and unseal keg
+                    boolean sealed = kegBlockEntity.isSealed();
                     
-                    if (opened) {
-                        caskBlockEntity.setClosed();
+                    if (!sealed) {
+                        kegBlockEntity.seal();
                     } else {
-                        caskBlockEntity.setOpened();
+                        kegBlockEntity.unseal();
                         
-                        if (state.get(FACE) == WallMountLocation.CEILING) {
-
+                        if (state.get(FACING) == Direction.DOWN) {
+                            if (kegBlockEntity.hasProduct()) {
+                                if (world.getBlockState(pos.down()).isAir()) {
+                                    dumpContents(world, pos.down(), kegBlockEntity);
+                                    
+                                }
+                            }
                         }
                     }
                     
-                } else {
-                    
-                    if (caskBlockEntity.addItem(item)) {
+                } else if (SulfurStick.canLightWith(item)) { // Attempt to light the keg.
+                    if (!player.isCreative() && item.isOf(Items.FIRE_CHARGE)) {
                         item.decrement(1);
+                    }
+                    lightKeg(world, pos, state);
+                } else { // Put the held item into the keg
+                    
+                    if (kegBlockEntity.addItem(item)) {
+                        if (!player.isCreative()) {
+                            item.decrement(1);
+                        }
                     } else {
-                        player.sendSystemMessage(new TranslatableText("message.tsbrewcraft.caskfull").formatted(Formatting.GOLD), Util.NIL_UUID);
+                        player.sendSystemMessage(new TranslatableText("message.tsbrewcraft.kegfull").formatted(Formatting.GOLD), Util.NIL_UUID);
                     }
                 }
             }
@@ -132,17 +102,30 @@ public class CaskBlock extends BlockWithEntity implements BlockEntityProvider {
 
         return ActionResult.SUCCESS;
     }
+    
+    public void dumpContents(World world, BlockPos pos, KegBlockEntity kegBlockEntity) {
+        if (kegBlockEntity.hasProduct()) { // redundant check
+            world.setBlockState(pos, Blocks.WATER.getDefaultState().with(FACING, Direction.UP).with(SEALED, true));
+        }
+    }
+    
+    public void lightKeg(World world, BlockPos pos, BlockState state) {
+        BlockEntity blockEntity = world.getBlockEntity(pos);
+        if (blockEntity instanceof KegBlockEntity kegBlockEntity) {
+            //if (kegBlockEntity.)
+        }
+    }
 
     @Override
     public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
         if (!state.isOf(newState.getBlock())) { // check block is destroyed?
             BlockEntity blockEntity = world.getBlockEntity(pos);
-            if (blockEntity instanceof CaskBlockEntity caskBlockEntity) {
+            if (blockEntity instanceof KegBlockEntity kegBlockEntity) {
                 // This would drop items if this contained items, but it doesn't
                 // Instead, we should check nbt data and drop liquid if it has it
                 //ItemScatterer.spawn(world, pos, (Inventory) blockEntity);
 
-                caskBlockEntity.dropItems(world, pos, state, caskBlockEntity);
+                kegBlockEntity.dropItems(world, pos, state, kegBlockEntity);
                 
                 
                 
@@ -153,14 +136,18 @@ public class CaskBlock extends BlockWithEntity implements BlockEntityProvider {
             super.onStateReplaced(state, world, pos, newState, moved);
         }
     }
+
+    public BlockState getPlacementState(ItemPlacementContext ctx) {
+        return this.getDefaultState().with(FACING, ctx.getPlayerLookDirection().getOpposite());
+    }
     
     public void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        builder.add(FACING, FACE, OPEN);
+        builder.add(FACING, SULFUR, SEALED);
     }
     
     static {
-        FACE = WallMountedBlock.FACE;
-        FACING = HorizontalFacingBlock.FACING;
-        OPEN = Properties.OPEN;
+        FACING = Properties.FACING;
+        SULFUR = BooleanProperty.of("sulfur");
+        SEALED = BooleanProperty.of("sealed");
     }
 }

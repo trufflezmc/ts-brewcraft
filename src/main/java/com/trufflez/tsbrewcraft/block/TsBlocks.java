@@ -34,7 +34,7 @@ public class TsBlocks {
     public static final Block STEAMED_RICE;
     public static final Block MOLDY_RICE;
         
-    public static final Block CASK;
+    public static final Block KEG;
         
     public static final Block SULFUR_STICK;
     public static final Block WALL_SULFUR_STICK;
@@ -74,7 +74,7 @@ public class TsBlocks {
         STEAMED_RICE = registerItemless("steamed_rice", new SteamedRiceBlock(FabricBlockSettings.of(Material.WOOD).nonOpaque().breakInstantly().ticksRandomly()));
         MOLDY_RICE = registerItemless("moldy_rice", new Block(FabricBlockSettings.of(Material.WOOD).nonOpaque().breakInstantly()));
         
-        CASK = registerItemless("cask", new CaskBlock(FabricBlockSettings.of(Material.WOOD).strength(4.0f)));
+        KEG = registerItemless("keg", new KegBlock(FabricBlockSettings.of(Material.WOOD).strength(4.0f)));
         
         SULFUR_STICK = registerItemless("sulfur_stick", new SulfurStick(FabricBlockSettings.of(Material.WOOD).nonOpaque().noCollision().breakInstantly()));
         WALL_SULFUR_STICK = registerItemless("wall_sulfur_stick", new WallSulfurStick(FabricBlockSettings.of(Material.WOOD).nonOpaque().noCollision().breakInstantly()));

@@ -1,5 +1,5 @@
 {
-  "type": "minecraft:crafting_shapeless",
+  "type": "minecraft:crafting",
   "pattern": [
     " # ",
     "#*#",
@@ -14,6 +14,6 @@
     }
   },
   "result": {
-    "item": "tsbrewcraft:cask"
+    "item": "tsbrewcraft:keg"
   }
 }

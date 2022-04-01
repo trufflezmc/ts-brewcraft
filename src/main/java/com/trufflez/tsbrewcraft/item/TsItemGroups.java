@@ -9,6 +9,6 @@ import net.minecraft.util.Identifier;
 
 public class TsItemGroups {
     public static final ItemGroup MAIN = FabricItemGroupBuilder.build(new Identifier(TsBrewcraft.MOD_ID, "main"),
-            () -> new ItemStack(TsBlocks.CASK));
+            () -> new ItemStack(TsBlocks.KEG));
     // Crops (seeds and products), beverages, equipment
 }
