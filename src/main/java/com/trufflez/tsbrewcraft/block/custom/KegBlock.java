@@ -1,11 +1,17 @@
 package com.trufflez.tsbrewcraft.block.custom;
 
+import com.trufflez.tsbrewcraft.item.TsItems;
+import com.trufflez.tsbrewcraft.recipe.KegProducts;
+import com.trufflez.tsbrewcraft.util.ItemTypes;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.DirectionProperty;
@@ -19,7 +25,11 @@ import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldAccess;
+import net.minecraft.world.explosion.Explosion;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Random;
 
 public class KegBlock extends BlockWithEntity implements BlockEntityProvider {
     public static final DirectionProperty FACING;
@@ -36,15 +46,11 @@ public class KegBlock extends BlockWithEntity implements BlockEntityProvider {
     
     @Nullable
     @Override
-    public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-        return new KegBlockEntity(pos, state);
-    }
+    public BlockEntity createBlockEntity(BlockPos pos, BlockState state) { return new KegBlockEntity(pos, state); }
     
     // archaic and possibly unnecessary code
     @Override
-    public BlockRenderType getRenderType(BlockState state) {
-        return BlockRenderType.MODEL;
-    }
+    public BlockRenderType getRenderType(BlockState state) { return BlockRenderType.MODEL; }
     
     // not correct
     /*@Override
@@ -65,72 +71,128 @@ public class KegBlock extends BlockWithEntity implements BlockEntityProvider {
                     
                     if (!sealed) {
                         kegBlockEntity.seal();
+                        world.setBlockState(pos, state.with(SEALED, true));
                     } else {
                         kegBlockEntity.unseal();
+                        world.setBlockState(pos, state.with(SEALED, false));
                         
-                        if (state.get(FACING) == Direction.DOWN) {
+                        Direction facing = state.get(FACING);
+                        
+                        if (facing != Direction.UP) {
                             if (kegBlockEntity.hasProduct()) {
-                                if (world.getBlockState(pos.down()).isAir()) {
-                                    dumpContents(world, pos.down(), kegBlockEntity);
-                                    
+                                
+                                BlockPos checkPos = pos.offset(facing);
+                                
+                                if (world.getBlockState(checkPos).isAir()) {
+                                    dumpContents(world, checkPos, kegBlockEntity);
                                 }
                             }
                         }
                     }
                     
                 } else if (SulfurStick.canLightWith(item)) { // Attempt to light the keg.
-                    if (!player.isCreative() && item.isOf(Items.FIRE_CHARGE)) {
-                        item.decrement(1);
+                    
+                    if (!player.isCreative() && item.isOf(Items.FIRE_CHARGE)) item.decrement(1);
+                    lightKeg(world, pos);
+                    
+                } else if (item.isOf(TsItems.SULFUR_STICK)) {
+                    
+                    if (!kegBlockEntity.isSealed() && !state.get(SULFUR)) {
+                        world.setBlockState(pos, state.with(SULFUR, true));
                     }
-                    lightKeg(world, pos, state);
+                    
                 } else { // Put the held item into the keg
                     
-                    if (kegBlockEntity.addItem(item)) {
-                        if (!player.isCreative()) {
-                            item.decrement(1);
-                        }
-                    } else {
+                    if (!kegBlockEntity.addItem(item)) {
                         player.sendSystemMessage(new TranslatableText("message.tsbrewcraft.kegfull").formatted(Formatting.GOLD), Util.NIL_UUID);
                     }
                 }
             }
         }
 
-        if (world.isClient) {
-            //TsBrewcraft.LOG.info("Block right-clicked");
-        }
-
         return ActionResult.SUCCESS;
     }
-    
-    public void dumpContents(World world, BlockPos pos, KegBlockEntity kegBlockEntity) {
-        if (kegBlockEntity.hasProduct()) { // redundant check
-            world.setBlockState(pos, Blocks.WATER.getDefaultState().with(FACING, Direction.UP).with(SEALED, true));
+
+    @Override
+    public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
+        Direction facing = state.get(FACING);
+        if (facing != Direction.UP) {
+            if (world.getBlockState(pos.offset(facing)).isAir()) {
+                BlockEntity blockEntity = world.getBlockEntity(pos);
+                if (blockEntity instanceof KegBlockEntity kegBlockEntity) {
+                    if (!kegBlockEntity.isSealed() && kegBlockEntity.hasProduct()) { // Redundant check in case keg was opened without block update
+                        dumpContents((World) world, pos.offset(facing), kegBlockEntity);
+                    }
+                }
+            }
         }
+        return state;
     }
     
-    public void lightKeg(World world, BlockPos pos, BlockState state) {
+    public void dumpContents(World world, BlockPos pos, KegBlockEntity kegBlockEntity) { // Overwrites position with keg contents
+        if (kegBlockEntity.hasProduct()) { // redundant check
+            world.setBlockState(pos, Blocks.WATER.getDefaultState());
+        }
+        kegBlockEntity.setProduct(KegProducts.NONE);
+        kegBlockEntity.setHasProduct(false);
+    }
+    
+    public void lightKeg(World world, BlockPos pos) {
+        BlockState state = world.getBlockState(pos);
         BlockEntity blockEntity = world.getBlockEntity(pos);
         if (blockEntity instanceof KegBlockEntity kegBlockEntity) {
-            //if (kegBlockEntity.)
+            if (kegBlockEntity.hasProduct()) {
+                String product = kegBlockEntity.getProduct();
+                if (ItemTypes.isFlammable(product) && !kegBlockEntity.isSealed()) {
+                    world.setBlockState(pos, Blocks.AIR.getDefaultState());
+                    world.createExplosion(null, null, null, pos.getX(), pos.getY(), pos.getZ(), 5.0f, true, Explosion.DestructionType.NONE);
+                } else if (ItemTypes.isExplosive(product) || (ItemTypes.isFlammable(product) && kegBlockEntity.isSealed())){
+                    world.setBlockState(pos, Blocks.AIR.getDefaultState());
+                    world.createExplosion(null, null, null, pos.getX(), pos.getY(), pos.getZ(), 8.0f, true, Explosion.DestructionType.BREAK);
+                }
+            } else if (state.get(SULFUR)) {
+                kegBlockEntity.setLit(true);
+            }
+        } 
+    }
+    
+    // TODO: may need to replace with a function that gets called after a certain number of ticks
+    @Override
+    public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
+        BlockEntity blockEntity = world.getBlockEntity(pos);
+        if (blockEntity instanceof KegBlockEntity kegBlockEntity) {
+            if (kegBlockEntity.isLit()) {
+                
+                if (kegBlockEntity.isSealed()) {
+                    kegBlockEntity.setClean(true);
+                }
+                
+                kegBlockEntity.setLit(false);
+
+                world.playSound(null, (double) pos.getX() + 0.5D, (double) pos.getY() + 0.5D, (double) pos.getZ() + 0.5D, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                
+                world.setBlockState(pos, state.with(SULFUR, false));
+            }
         }
     }
 
     @Override
+    public boolean hasRandomTicks(BlockState state) {
+        return state.get(SULFUR); // this doesn't seem to be the best option, but I don't want to add another boolean property
+    }
+    
+    @Override
     public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
-        if (!state.isOf(newState.getBlock())) { // check block is destroyed?
+        if (!state.isOf(newState.getBlock())) {
             BlockEntity blockEntity = world.getBlockEntity(pos);
             if (blockEntity instanceof KegBlockEntity kegBlockEntity) {
-                // This would drop items if this contained items, but it doesn't
-                // Instead, we should check nbt data and drop liquid if it has it
-                //ItemScatterer.spawn(world, pos, (Inventory) blockEntity);
-
                 kegBlockEntity.dropItems(world, pos, state, kegBlockEntity);
-                
-                
-                
-                // update comparators
                 world.updateComparators(pos,this);
+                
+                if (kegBlockEntity.hasProduct()) { // sets previous location of keg to keg contents
+                    dumpContents(world, pos, kegBlockEntity);
+                }
+                
             }
             
             super.onStateReplaced(state, world, pos, newState, moved);

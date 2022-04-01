@@ -18,38 +18,44 @@ public class KegBlockEntity extends BlockEntity {
     private int timeSinceSulfured;
     private int timeSinceSealed;
     private boolean sealed;
-    
+    private boolean lit;
+    private boolean clean;
     private boolean hasProduct;
     private String product;
-    
     private final DefaultedList<ItemStack> contents;
     
     
     public KegBlockEntity(BlockPos pos, BlockState state) {
         super(TsBlockEntities.KEG_BLOCKENTITY, pos, state);
-        this.contents = DefaultedList.ofSize(4, ItemStack.EMPTY);
         this.timeSinceSulfured = 0;
         this.timeSinceSealed = 0;
         this.sealed = false;
+        this.lit = false;
+        this.clean = false;
         this.hasProduct = false;
         this.product = KegProducts.NONE.toString();
+        this.contents = DefaultedList.ofSize(4, ItemStack.EMPTY);
     }
     
-    public DefaultedList<ItemStack> getContents() { return this.contents; }
-    public String getProduct() { return this.product; }
     public boolean isSealed() { return this.sealed; }
+    public boolean isLit() { return this.lit; }
+    public boolean isClean() { return this.clean; }
     public boolean hasProduct() { return this.hasProduct; }
+    public String getProduct() { return this.product; }
+    public DefaultedList<ItemStack> getContents() { return this.contents; }
     
     public boolean addItem(ItemStack item) {
-        for(int i = 1; i < this.contents.size(); ++i) { // item position 0 is used for last item
-            ItemStack itemStack = this.contents.get(i);
-            if (itemStack.isEmpty()) {
-                this.contents.set(i, item.split(1));
-                this.markChanged();
-                return true; // exits loop
+        if (!this.world.isClient()) {
+            for (int i = 0; i < this.contents.size(); ++i) {
+                ItemStack itemStack = this.contents.get(i);
+                if (itemStack.isEmpty()) {
+                    this.contents.set(i, item.split(1));
+                    this.markChanged();
+                    return true; // exits loop
+                }
             }
+            return false;
         }
-
         return false;
     }
     
@@ -75,17 +81,32 @@ public class KegBlockEntity extends BlockEntity {
     }
 
     public void unseal() {
-        // check orientation of keg. If it is on its side, dump the contents.
         this.sealed = false;
+        this.clean = false;
         this.markDirty();
+    }
+    
+    public void setProduct(KegProducts product) {
+        this.product = product.toString();
+        this.markDirty();
+    }
+    
+    public void setHasProduct(boolean bl) {
+        this.hasProduct = bl;
+    }
+    
+    public void setClean(boolean bl) {
+        this.clean = bl;
+    }
+
+    public void setLit(boolean bl) {
+        this.lit = bl;
     }
 
     private void markChanged() {
         this.markDirty();
         Objects.requireNonNull(this.getWorld()).updateListeners(this.getPos(), this.getCachedState(), this.getCachedState(), 3);
     }
-    
-    
     
     @Override
     public void readNbt(NbtCompound nbt) {
@@ -95,6 +116,8 @@ public class KegBlockEntity extends BlockEntity {
         this.timeSinceSulfured = nbt.getInt("timeSinceSulfured");
         this.timeSinceSealed = nbt.getInt("timeSinceSealed");
         this.sealed = nbt.getBoolean("sealed");
+        this.lit = nbt.getBoolean("lit");
+        this.clean = nbt.getBoolean("clean");
         this.hasProduct = nbt.getBoolean("hasProduct");
         this.product = nbt.getString("product");
     }
@@ -106,6 +129,8 @@ public class KegBlockEntity extends BlockEntity {
         nbt.putInt("timeSinceSulfured", this.timeSinceSulfured);
         nbt.putInt("timeSinceSealed", this.timeSinceSealed);
         nbt.putBoolean("sealed", this.sealed);
+        nbt.putBoolean("lit", this.lit);
+        nbt.putBoolean("clean", this.clean);
         nbt.putBoolean("hasProduct", this.hasProduct);
         nbt.putString("product", this.product);
     }
