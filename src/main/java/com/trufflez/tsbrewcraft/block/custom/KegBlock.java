@@ -151,7 +151,7 @@ public class KegBlock extends BlockWithEntity implements BlockEntityProvider {
                     world.createExplosion(null, null, null, pos.getX(), pos.getY(), pos.getZ(), 8.0f, true, Explosion.DestructionType.BREAK);
                 }
             } else if (state.get(SULFUR)) {
-                kegBlockEntity.setLit(true);
+                kegBlockEntity.setLit();
             }
         } 
     }
@@ -167,7 +167,7 @@ public class KegBlock extends BlockWithEntity implements BlockEntityProvider {
                     kegBlockEntity.setClean(true);
                 }
                 
-                kegBlockEntity.setLit(false);
+                kegBlockEntity.setLit();
 
                 world.playSound(null, (double) pos.getX() + 0.5D, (double) pos.getY() + 0.5D, (double) pos.getZ() + 0.5D, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 1.0F, 1.0F);
                 
