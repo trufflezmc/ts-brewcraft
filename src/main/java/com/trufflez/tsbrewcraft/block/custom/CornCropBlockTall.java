@@ -60,11 +60,13 @@ public class CornCropBlockTall extends TallPlantBlock implements Fertilizable {
         return OffsetType.NONE;
     }
     
+    
+    
     @Override // identical to "getSeedsItem" extending CropBlock
     public ItemStack getPickStack(BlockView world, BlockPos pos, BlockState state) {
         return new ItemStack(TsItems.CORN);
     }
-
+    
     @Override
     public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
         int growthAmount = this.getAge(state) + MathHelper.nextInt(world.random, 2, 5);

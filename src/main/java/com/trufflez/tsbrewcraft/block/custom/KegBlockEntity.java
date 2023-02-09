@@ -21,7 +21,7 @@ public class KegBlockEntity extends BlockEntity {
     private short burnTime;
     private short timeSinceSealed;
     private boolean sealed;
-    private boolean lit;
+    //private boolean lit;
     private boolean clean;
     private boolean hasProduct;
     private String product;
@@ -82,7 +82,7 @@ public class KegBlockEntity extends BlockEntity {
     }
     
     public static void tick(World world, BlockPos pos, BlockState state, KegBlockEntity blockEntity) {
-        boolean bl = blockEntity.isLit();
+        boolean bl = blockEntity.isLit(); // isLit is a function of burn time
         if (bl) {
             --blockEntity.burnTime;
         }
@@ -116,7 +116,7 @@ public class KegBlockEntity extends BlockEntity {
             }
         }
         
-        if (willRot || kefirIngredients >= 1){                           // Will rot
+        if (willRot || kefirIngredients >= 1){  // Will rot
             product = KegProducts.ROT;
         } else if (beerIngredients >= 2) {      // Will be some sort of beer
             product = KegProducts.BEER;
@@ -165,7 +165,7 @@ public class KegBlockEntity extends BlockEntity {
         this.burnTime = ticks;
     }
 
-    private void markChanged() {
+    private void markChanged() { // Based on furnace code. Not sure what the significance of this is compared to markDirty()
         this.markDirty();
         Objects.requireNonNull(this.getWorld()).updateListeners(this.getPos(), this.getCachedState(), this.getCachedState(), 3);
     }
