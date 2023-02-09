@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "axis:x": {
+      "model": "tsbrewcraft:block/trellis"
+    },
+    "axis:y": {
+      "model": "tsbrewcraft:block/trellis"
+    }
+  }
+}
