@@ -18,11 +18,10 @@ import net.minecraft.state.property.IntProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
-
-import java.util.Random;
 
 import static com.trufflez.tsbrewcraft.block.custom.CornCropBlockTall.HALF;
 
@@ -49,7 +48,7 @@ public class RiceCropBlock extends CropBlock implements Waterloggable {
             return Blocks.AIR.getDefaultState(); // break block if invalid placement
         } else { // if valid, 
             if ((Boolean)state.get(WATERLOGGED)) { // update water tick if waterlogged
-                world.createAndScheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
+                world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
             }
 
             return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
@@ -63,8 +62,8 @@ public class RiceCropBlock extends CropBlock implements Waterloggable {
     
     @Override
     protected boolean canPlantOnTop(BlockState floor, BlockView world, BlockPos pos) {
-        //return floor.isOf(Blocks.DIRT); // TODO: add mud for 1.19
-        return true;
+        return floor.isOf(Blocks.DIRT) || floor.isOf(Blocks.MUD);
+        //return true;
     }
     
     @Override

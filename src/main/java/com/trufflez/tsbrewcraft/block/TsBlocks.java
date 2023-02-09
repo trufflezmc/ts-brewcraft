@@ -4,15 +4,16 @@ import com.trufflez.tsbrewcraft.TsBrewcraft;
 import com.trufflez.tsbrewcraft.block.custom.*;
 import com.trufflez.tsbrewcraft.item.TsItemGroups;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.Material;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
-import net.minecraft.particle.ParticleTypes;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 
 public class TsBlocks {
 
@@ -44,16 +45,25 @@ public class TsBlocks {
 
     private static Block register(String id, Block block) {
         registerBlockItem(id, block);
-        return Registry.register(Registry.BLOCK, new Identifier(TsBrewcraft.MOD_ID, id), block);
+        return Registry.register(Registries.BLOCK, new Identifier(TsBrewcraft.MOD_ID, id), block);
     }
 
     private static Block registerItemless(String id, Block block) {
-        return Registry.register(Registry.BLOCK, new Identifier(TsBrewcraft.MOD_ID, id), block);
+        return Registry.register(Registries.BLOCK, new Identifier(TsBrewcraft.MOD_ID, id), block);
     }
     
+    // TODO (mc1.19.3): Redo item groups
+    
     private static Item registerBlockItem(String id, Block block) {
-        return Registry.register(Registry.ITEM, new Identifier(TsBrewcraft.MOD_ID, id),
-                new BlockItem(block, new FabricItemSettings().group(TsItemGroups.MAIN)));
+        Item item = Registry.register(Registries.ITEM, new Identifier(TsBrewcraft.MOD_ID, id),
+                new BlockItem(block, new FabricItemSettings()));
+        
+        //return Registry.register(Registry.ITEM, new Identifier(TsBrewcraft.MOD_ID, id),
+        //        new BlockItem(block, new FabricItemSettings().group(TsItemGroups.MAIN)));
+
+        ItemGroupEvents.modifyEntriesEvent(TsItemGroups.MAIN).register(entries -> entries.add(item));
+        
+        return item;
     }
     
     static {

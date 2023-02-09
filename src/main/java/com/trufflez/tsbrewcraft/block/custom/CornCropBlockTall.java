@@ -13,11 +13,11 @@ import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
-
-import java.util.Random;
+import net.minecraft.world.WorldView;
 
 public class CornCropBlockTall extends TallPlantBlock implements Fertilizable {
     public static final int MAX_AGE = 2;
@@ -46,19 +46,19 @@ public class CornCropBlockTall extends TallPlantBlock implements Fertilizable {
     }
 
     @Override
-    public boolean isFertilizable(BlockView world, BlockPos pos, BlockState state, boolean isClient) {
+    public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state, boolean isClient) {
         return true;
     }
 
     @Override
-    public boolean canGrow(World world, Random random, BlockPos pos, BlockState state) {
+    public boolean canGrow(World world, net.minecraft.util.math.random.Random random, BlockPos pos, BlockState state) {
         return true;
     }
     
-    @Override
+    /*@Override
     public OffsetType getOffsetType() {
         return OffsetType.NONE;
-    }
+    }*/
     
     
     
@@ -68,7 +68,7 @@ public class CornCropBlockTall extends TallPlantBlock implements Fertilizable {
     }
     
     @Override
-    public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
+    public void grow(ServerWorld world, net.minecraft.util.math.random.Random random, BlockPos pos, BlockState state) {
         int growthAmount = this.getAge(state) + MathHelper.nextInt(world.random, 2, 5);
         growthAmount = Math.max(growthAmount, MAX_AGE);
         
@@ -125,6 +125,7 @@ public class CornCropBlockTall extends TallPlantBlock implements Fertilizable {
 
         return f;
     }
+    
     
     @Override
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {

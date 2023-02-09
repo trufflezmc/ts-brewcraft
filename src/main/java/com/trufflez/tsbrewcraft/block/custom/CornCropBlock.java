@@ -11,10 +11,9 @@ import net.minecraft.state.property.IntProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.BlockView;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
-
-import java.util.Random;
+import net.minecraft.world.WorldView;
 
 import static com.trufflez.tsbrewcraft.block.custom.CornCropBlockTall.HALF;
 
@@ -25,12 +24,12 @@ public class CornCropBlock extends CropBlock implements Fertilizable {
     public CornCropBlock(Settings settings) { super(settings); }
 
     @Override
-    public boolean isFertilizable(BlockView world, BlockPos pos, BlockState state, boolean isClient) {
+    public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state, boolean isClient) {
         return world.getBlockState(pos.up()).isAir();
     }
 
     @Override
-    public boolean canGrow(World world, Random random, BlockPos pos, BlockState state) {
+    public boolean canGrow(World world, net.minecraft.util.math.random.Random random, BlockPos pos, BlockState state) {
         return world.getBlockState(pos.up()).isAir();
     }
     
@@ -40,7 +39,7 @@ public class CornCropBlock extends CropBlock implements Fertilizable {
     }
 
     @Override
-    public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
+    public void grow(ServerWorld world, net.minecraft.util.math.random.Random random, BlockPos pos, BlockState state) {
         int growthAmount = MathHelper.nextInt(world.random, 2, 5);
         int age = this.getAge(state) + growthAmount;
         if (age > MAX_AGE) {
@@ -64,6 +63,7 @@ public class CornCropBlock extends CropBlock implements Fertilizable {
     public boolean hasRandomTicks(BlockState state) {
         return true;
     }
+    
     
     @Override
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {

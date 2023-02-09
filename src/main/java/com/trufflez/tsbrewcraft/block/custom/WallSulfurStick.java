@@ -62,11 +62,10 @@ public class WallSulfurStick extends SulfurStick {
         WorldView worldView = ctx.getWorld();
         BlockPos blockPos = ctx.getBlockPos();
         Direction[] directions = ctx.getPlacementDirections();
-        Direction[] var6 = directions;
-        int var7 = directions.length;
+        int numDirections = directions.length;
 
-        for(int var8 = 0; var8 < var7; ++var8) {
-            Direction direction = var6[var8];
+        for(int i = 0; i < numDirections; ++i) {
+            Direction direction = directions[i];
             if (direction.getAxis().isHorizontal()) {
                 Direction direction2 = direction.getOpposite();
                 blockState = (BlockState)blockState.with(FACING, direction2);

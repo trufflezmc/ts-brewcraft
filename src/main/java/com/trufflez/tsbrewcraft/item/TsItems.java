@@ -7,11 +7,14 @@ import com.trufflez.tsbrewcraft.item.custom.MaltovCocktail;
 import com.trufflez.tsbrewcraft.item.patches.TsAliasedBlockItem;
 import com.trufflez.tsbrewcraft.item.patches.TsItem;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.*;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.util.math.Direction;
 
 public class TsItems {
     public static final Item AGAVE;
@@ -72,36 +75,44 @@ public class TsItems {
     
     // Takes "new" + custom item type
     private static Item register(String id, Item item) {
-        return Registry.register(Registry.ITEM, new Identifier(TsBrewcraft.MOD_ID, id), item);
+        addToItemGroup(TsItemGroups.MAIN, item);
+        return Registry.register(Registries.ITEM, new Identifier(TsBrewcraft.MOD_ID, id), item);
     }
     
     // Takes standard FoodComponent
     private static Item register(String id, FoodComponent item) {
-        return Registry.register(Registry.ITEM, new Identifier(TsBrewcraft.MOD_ID, id), new TsItem(settings().food(item)));
+        return Registry.register(Registries.ITEM, new Identifier(TsBrewcraft.MOD_ID, id), new TsItem(settings().food(item)));
     }
     
     // Takes DrinkItem FoodComponent
     private static Item register(String id, FoodComponent item, int uses, int strength) {
-        return Registry.register(Registry.ITEM, new Identifier(TsBrewcraft.MOD_ID, id),
+        return Registry.register(Registries.ITEM, new Identifier(TsBrewcraft.MOD_ID, id),
                 new DrinkItem(uses, strength, settings().food(item)));
     }
     
     // Takes just the name
     private static Item register(String id) {
-        return Registry.register(Registry.ITEM, new Identifier(TsBrewcraft.MOD_ID, id), new TsItem(settings()));
+        return Registry.register(Registries.ITEM, new Identifier(TsBrewcraft.MOD_ID, id), new TsItem(settings()));
     }
     
     // Takes Block and makes BlockItem
     private static Item register(String id, Block block) {
-        return Registry.register(Registry.ITEM, new Identifier(TsBrewcraft.MOD_ID, id), new BlockItem(block, settings()));
+        return Registry.register(Registries.ITEM, new Identifier(TsBrewcraft.MOD_ID, id), new BlockItem(block, settings()));
     }
     
     // I just don't like typing this out a million times
     private static Item.Settings settings() {
-        return new FabricItemSettings().group(TsItemGroups.MAIN);
+        return new FabricItemSettings();
     }
-    private static Item.Settings settings(ItemGroup group) {
-        return new FabricItemSettings().group(group);
+//    private static Item.Settings settings(ItemGroup group) {
+//        // TODO (mc1.19.3): add to item group
+//        return new FabricItemSettings();
+//    }
+    
+    
+    public static void addToItemGroup(ItemGroup group, Item item) {
+        ItemGroupEvents.modifyEntriesEvent(group).register(entries ->
+                entries.add(item));
     }
     
     //private static BlockItem register(String id, BlockItem blockItem) { return Registry.register(Registry.ITEM, new Identifier(TsBrewcraft.MOD_ID, id), blockItem); }
@@ -158,8 +169,10 @@ public class TsItems {
         // BlockItems, registered here for tooltips
         
         KEG = register("keg", TsBlocks.KEG);
-        SULFUR_STICK = register("sulfur_stick", new WallStandingBlockItem(TsBlocks.SULFUR_STICK, TsBlocks.WALL_SULFUR_STICK, settings()));
+        SULFUR_STICK = register("sulfur_stick", new VerticallyAttachableBlockItem(TsBlocks.SULFUR_STICK, TsBlocks.WALL_SULFUR_STICK, settings(), Direction.DOWN));
     }
+    
+    // TODO (mc1.19.3): create massive method here for adding things to the itemgroup
     
     public static void init() {
         TsBrewcraft.LOGGER.debug("Registering items");

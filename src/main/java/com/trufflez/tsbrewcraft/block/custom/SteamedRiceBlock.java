@@ -3,11 +3,8 @@ package com.trufflez.tsbrewcraft.block.custom;
 import com.trufflez.tsbrewcraft.block.TsBlocks;
 import net.minecraft.block.*;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.state.StateManager;
-import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.util.math.BlockPos;
-
-import java.util.Random;
+import net.minecraft.util.math.random.Random;
 
 public class SteamedRiceBlock extends Block {
     //public static final BooleanProperty MOLD;
@@ -32,9 +29,9 @@ public class SteamedRiceBlock extends Block {
     @Override
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         //if (!this.isMoldy(state)) {
-            if (random.nextInt((int) (25.0F / 4) + 1) == 0) { // f = 4
-                world.setBlockState(pos, TsBlocks.MOLDY_RICE.getDefaultState());
-            }
+        if (random.nextInt((int) (25.0F / 4) + 1) == 0) { // f = 4
+            world.setBlockState(pos, TsBlocks.MOLDY_RICE.getDefaultState());
+        }
         //}
     }
     

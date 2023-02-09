@@ -16,7 +16,7 @@ import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.Properties;
-import net.minecraft.text.TranslatableText;
+import net.minecraft.text.TranslatableTextContent;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
@@ -24,12 +24,11 @@ import net.minecraft.util.Util;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.explosion.Explosion;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.Random;
 
 public class KegBlock extends BlockWithEntity implements BlockEntityProvider {
     public static final DirectionProperty FACING;
@@ -104,7 +103,8 @@ public class KegBlock extends BlockWithEntity implements BlockEntityProvider {
                 } else { // Put the held item into the keg
                     
                     if (!kegBlockEntity.addItem(item)) {
-                        player.sendSystemMessage(new TranslatableText("message.tsbrewcraft.kegfull").formatted(Formatting.GOLD), Util.NIL_UUID);
+                        // TODO (mc1.19.3): Figure out how to send chat messages to player again
+                        //player.sendMessage(new TranslatableTextContent("message.tsbrewcraft.kegfull").(Formatting.GOLD), Util.NIL_UUID);
                     }
                 }
             }
@@ -145,10 +145,10 @@ public class KegBlock extends BlockWithEntity implements BlockEntityProvider {
                 String product = kegBlockEntity.getProduct();
                 if (ItemTypes.isFlammable(product) && !kegBlockEntity.isSealed()) {
                     world.setBlockState(pos, Blocks.AIR.getDefaultState());
-                    world.createExplosion(null, null, null, pos.getX(), pos.getY(), pos.getZ(), 5.0f, true, Explosion.DestructionType.NONE);
+                    world.createExplosion(null, null, null, pos.getX(), pos.getY(), pos.getZ(), 5.0f, true, World.ExplosionSourceType.NONE);
                 } else if (ItemTypes.isExplosive(product) || (ItemTypes.isFlammable(product) && kegBlockEntity.isSealed())){
                     world.setBlockState(pos, Blocks.AIR.getDefaultState());
-                    world.createExplosion(null, null, null, pos.getX(), pos.getY(), pos.getZ(), 8.0f, true, Explosion.DestructionType.BREAK);
+                    world.createExplosion(null, null, null, pos.getX(), pos.getY(), pos.getZ(), 8.0f, true, World.ExplosionSourceType.BLOCK);
                 }
             } else if (state.get(SULFUR)) {
                 kegBlockEntity.setLit();
@@ -157,6 +157,7 @@ public class KegBlock extends BlockWithEntity implements BlockEntityProvider {
     }
     
     // TODO: may need to replace with a function that gets called after a certain number of ticks
+    
     @Override
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         BlockEntity blockEntity = world.getBlockEntity(pos);

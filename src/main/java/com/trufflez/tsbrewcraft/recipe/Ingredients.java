@@ -5,8 +5,8 @@ import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.tag.ItemTags;
-import net.minecraft.util.registry.RegistryEntry;
+import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.registry.tag.ItemTags;
 
 public class Ingredients {
     

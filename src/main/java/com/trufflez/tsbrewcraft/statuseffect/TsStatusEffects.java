@@ -2,15 +2,16 @@ package com.trufflez.tsbrewcraft.statuseffect;
 
 import com.trufflez.tsbrewcraft.TsBrewcraft;
 import net.minecraft.entity.effect.StatusEffect;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 
 public class TsStatusEffects {
     public static final StatusEffect TIPSY;
     public static final StatusEffect DRUNK;
         
     private static StatusEffect register(String id, StatusEffect statusEffect) {
-        return Registry.register(Registry.STATUS_EFFECT, new Identifier(TsBrewcraft.MOD_ID, id), statusEffect);
+        return Registry.register(Registries.STATUS_EFFECT, new Identifier(TsBrewcraft.MOD_ID, id), statusEffect);
     }
     
     static {

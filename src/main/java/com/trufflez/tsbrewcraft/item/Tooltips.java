@@ -2,16 +2,16 @@ package com.trufflez.tsbrewcraft.item;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
 
 import java.util.List;
 
 public class Tooltips {
     
-    public static TranslatableText tooltip(String item) {
-        return (TranslatableText) new TranslatableText("tooltip.tsbrewcraft." + item).formatted(Formatting.GRAY);
+    public static MutableText tooltip(String item) {
+        return (MutableText) Text.translatable("tooltip.tsbrewcraft." + item).formatted(Formatting.GRAY);
     }
     
     public static void addThis(ItemStack stack, List<Text> tooltip){
