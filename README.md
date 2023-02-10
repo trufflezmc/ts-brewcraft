@@ -46,6 +46,6 @@
 
 Or maybe you're a masochist. Proceed at your own risk.
 
-##Legal
+### Disclaimers
 
 ```FOR ENTERTAINMENT PURPOSES ONLY. TrufflezMC, the creator of T's Brewcraft, does not condone the consumption of alcoholic beverages. T's Brewcraft contains no advertisements for alcohol brands nor requires users of this mod to participate in representations of alcoholic beverage consumption.```
