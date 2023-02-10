@@ -87,7 +87,7 @@ public class TsBlocks {
         
         KEG = registerItemless("keg", new KegBlock(FabricBlockSettings.of(Material.WOOD).strength(4.0f)));
 
-        TRELLIS = registerItemless("trellis", new TrellisBlock(FabricBlockSettings.of(Material.WOOD).strength(4.0f)));
+        TRELLIS = registerItemless("trellis", new TrellisBlock(FabricBlockSettings.of(Material.WOOD).nonOpaque().strength(4.0f)));
         
         SULFUR_STICK = registerItemless("sulfur_stick", new SulfurStick(FabricBlockSettings.of(Material.WOOD).nonOpaque().noCollision().breakInstantly()));
         WALL_SULFUR_STICK = registerItemless("wall_sulfur_stick", new WallSulfurStick(FabricBlockSettings.of(Material.WOOD).nonOpaque().noCollision().breakInstantly()));

@@ -69,6 +69,7 @@ public class TsItems {
     // BlockItems, registered here for tooltips
 
     public static final Item KEG;
+    public static final Item TRELLIS;
     public static final Item SULFUR_STICK;
     
     //private static BlockItem blockItem(Block block) { return new BlockItem(block, new FabricItemSettings().group(TsItemGroups.MAIN)); }
@@ -81,23 +82,31 @@ public class TsItems {
     
     // Takes standard FoodComponent
     private static Item register(String id, FoodComponent item) {
-        return Registry.register(Registries.ITEM, new Identifier(TsBrewcraft.MOD_ID, id), new TsItem(settings().food(item)));
+        Item foodItem = Registry.register(Registries.ITEM, new Identifier(TsBrewcraft.MOD_ID, id), new TsItem(settings().food(item)));
+        addToItemGroup(TsItemGroups.MAIN, foodItem);
+        return foodItem;
     }
     
     // Takes DrinkItem FoodComponent
     private static Item register(String id, FoodComponent item, int uses, int strength) {
-        return Registry.register(Registries.ITEM, new Identifier(TsBrewcraft.MOD_ID, id),
+        Item drinkItem = Registry.register(Registries.ITEM, new Identifier(TsBrewcraft.MOD_ID, id),
                 new DrinkItem(uses, strength, settings().food(item)));
+        addToItemGroup(TsItemGroups.MAIN, drinkItem);
+        return drinkItem;
     }
     
     // Takes just the name
     private static Item register(String id) {
-        return Registry.register(Registries.ITEM, new Identifier(TsBrewcraft.MOD_ID, id), new TsItem(settings()));
+        Item item = Registry.register(Registries.ITEM, new Identifier(TsBrewcraft.MOD_ID, id), new TsItem(settings()));
+        addToItemGroup(TsItemGroups.MAIN, item);
+        return item;
     }
     
     // Takes Block and makes BlockItem
     private static Item register(String id, Block block) {
-        return Registry.register(Registries.ITEM, new Identifier(TsBrewcraft.MOD_ID, id), new BlockItem(block, settings()));
+        Item item = Registry.register(Registries.ITEM, new Identifier(TsBrewcraft.MOD_ID, id), new BlockItem(block, settings()));
+        addToItemGroup(TsItemGroups.MAIN, item);
+        return item;
     }
     
     // I just don't like typing this out a million times
@@ -111,8 +120,7 @@ public class TsItems {
     
     
     public static void addToItemGroup(ItemGroup group, Item item) {
-        ItemGroupEvents.modifyEntriesEvent(group).register(entries ->
-                entries.add(item));
+        ItemGroupEvents.modifyEntriesEvent(group).register(entries -> entries.add(item));
     }
     
     //private static BlockItem register(String id, BlockItem blockItem) { return Registry.register(Registry.ITEM, new Identifier(TsBrewcraft.MOD_ID, id), blockItem); }
@@ -169,6 +177,7 @@ public class TsItems {
         // BlockItems, registered here for tooltips
         
         KEG = register("keg", TsBlocks.KEG);
+        TRELLIS = register("trellis", TsBlocks.TRELLIS);
         SULFUR_STICK = register("sulfur_stick", new VerticallyAttachableBlockItem(TsBlocks.SULFUR_STICK, TsBlocks.WALL_SULFUR_STICK, settings(), Direction.DOWN));
     }
     

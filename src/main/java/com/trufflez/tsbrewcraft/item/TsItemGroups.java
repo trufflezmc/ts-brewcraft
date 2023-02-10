@@ -1,7 +1,6 @@
 package com.trufflez.tsbrewcraft.item;
 
 import com.trufflez.tsbrewcraft.TsBrewcraft;
-import com.trufflez.tsbrewcraft.block.TsBlocks;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
@@ -12,7 +11,7 @@ public class TsItemGroups {
     
     public static ItemGroup MAIN;
     
-    public static void registerItemGroup(){
+    public static void registerItemGroups(){
         MAIN = FabricItemGroup.builder(new Identifier(TsBrewcraft.MOD_ID, "main"))
                 .displayName(Text.literal("T's Brewcraft"))
                 .icon(() -> new ItemStack(TsItems.HOPS)).build();
@@ -26,6 +25,9 @@ public class TsItemGroups {
 //            .build();
             //() -> new ItemStack(TsBlocks.KEG));
     // Crops (seeds and products), beverages, equipment
-    
-    
+
+    public static void init() {
+        TsBrewcraft.LOGGER.debug("Registering itemGroups");
+        registerItemGroups();
+    }
 }

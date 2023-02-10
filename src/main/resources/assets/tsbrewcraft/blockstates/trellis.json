@@ -1,10 +1,18 @@
 {
   "variants": {
-    "axis:x": {
+    "axis=x,bottom=false": {
       "model": "tsbrewcraft:block/trellis"
     },
-    "axis:y": {
-      "model": "tsbrewcraft:block/trellis"
+    "axis=x,bottom=true": {
+      "model": "tsbrewcraft:block/trellis_bottom"
+    },
+    "axis=z,bottom=false": {
+      "model": "tsbrewcraft:block/trellis",
+      "y": 90
+    },
+    "axis=z,bottom=true": {
+      "model": "tsbrewcraft:block/trellis_bottom",
+      "y": 90
     }
   }
 }

@@ -53,8 +53,8 @@
   "block.tsbrewcraft.dead_rice": "Dead Rice",
   
   
-  "block.tsbrewcraft.barrel": "Barrel",
   "block.tsbrewcraft.keg": "Keg",
+  "block.tsbrewcraft.trellis": "Trellis",
   "block.tsbrewcraft.sulfur_stick": "Sulfur Stick",
   "item.tsbrewcraft.beer_bottle": "Beer Bottle",
   "item.tsbrewcraft.wine_bottle": "Wine Bottle",
@@ -103,6 +103,7 @@
   "tooltip.tsbrewcraft.strange_wine": "...I guess?",
   
   "tooltip.tsbrewcraft.keg": "",
+  "tooltip.tsbrewcraft.trellis": "",
   "tooltip.tsbrewcraft.sulfur_stick": "Disinfects kegs.",
   "tooltip.tsbrewcraft.beer_bottle": "",
   "tooltip.tsbrewcraft.wine_bottle": "",
