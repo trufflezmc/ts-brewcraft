@@ -4,29 +4,37 @@
 
 ...but mainly the worst.
 
-> FOR ENTERTAINMENT PURPOSES ONLY.
-
-> Currently in development!
+> Currently in development, VERY broken and unfinished!
 
 ## Planned Features:
 
 **Grow Crops**
 
-- Grapes, Barley, Hops, Corn, Rice, and Agave.
+- Grapes, Barley, Hops, Corn, Rice, and Agave
 
 **Kegging, Distillation, Ageing**
 
-- Any food item can be fermented, distilled, or aged. That doesn't mean it's a good idea, though.
+- Adds a keg block that allows _any_ food item to be fermented, distilled, or aged.
+
+    (Whether that's a good idea is another story)
+
+**Bottling and packaging**
+
+- Get your fermented things into bottles for everyone to enjoy!
+
+**Unwanted surprises!**
+
+- Not only does this \*not\* come with a manual, you're going to find _everything_ out the hard way.
 
 ## Just like real life,
 
 **Everything is dangerous.**
 
-- With homebrewing comes explosions, poisoning, fire, and much more.
+- With homebrewing comes spills, poisoning, explosions, and much more.
 
-**It is tedious as heck.**
+**It is tedious and frustrating.**
 
-- Even if you get everything right, it's still a pain. Especially bottling.
+- Everything you do will be arduous.
 
 **Nothing you make is good for you.**
 
@@ -35,3 +43,9 @@
 ## So, why?
 
 **It's all about the journey, or something.**
+
+Or maybe you're a masochist. Proceed at your own risk.
+
+##Legal
+
+```FOR ENTERTAINMENT PURPOSES ONLY. TrufflezMC, the creator of T's Brewcraft, does not condone the consumption of alcoholic beverages. T's Brewcraft contains no advertisements for alcohol brands nor requires users of this mod to participate in representations of alcoholic beverage consumption.```
