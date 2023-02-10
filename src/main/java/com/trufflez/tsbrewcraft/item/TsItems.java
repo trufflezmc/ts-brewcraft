@@ -19,9 +19,10 @@ import net.minecraft.util.math.Direction;
 public class TsItems {
     public static final Item AGAVE;
     public static final Item BARLEY;
-    public static final Item PALE_MALT;
-    public static final Item DARK_MALT;
+    public static final Item MALT;
+    //public static final Item DARK_MALT;
     public static final Item HOPS;
+    public static final Item HOPS_RHIZOME;
     public static final Item RICE;
     public static final Item STEAMED_RICE;
     public static final Item MOLDY_RICE;
@@ -126,14 +127,15 @@ public class TsItems {
     //private static BlockItem register(String id, BlockItem blockItem) { return Registry.register(Registry.ITEM, new Identifier(TsBrewcraft.MOD_ID, id), blockItem); }
     
     static {
-        AGAVE = register("agave", new TsAliasedBlockItem(TsBlocks.AGAVE, settings()));
+        AGAVE = register("agave", new TsAliasedBlockItem(TsBlocks.AGAVE, settings())); // TODO: make agave edible
         BARLEY = register("barley", new TsAliasedBlockItem(TsBlocks.BARLEY, settings()));
-        PALE_MALT = register("pale_malt");
-        DARK_MALT = register("dark_malt");
-        HOPS = register("hops");
+        MALT = register("malt"); // TODO: make malt edible and give achievement
+        //DARK_MALT = register("dark_malt");
+        HOPS = register("hops"); // TODO: make hops edible
+        HOPS_RHIZOME = register("hops_rhizome"); // TODO: make rhizome edible
         RICE = register("rice", new TsAliasedBlockItem(TsBlocks.RICE, settings()));
         STEAMED_RICE = register("steamed_rice", new TsAliasedBlockItem(TsBlocks.STEAMED_RICE, settings().food(TsConsumables.STEAMED_RICE)));
-        MOLDY_RICE = register("moldy_rice", new TsAliasedBlockItem(TsBlocks.MOLDY_RICE, settings().food(TsConsumables.MOLDY_RICE)));
+        MOLDY_RICE = register("moldy_rice", new TsAliasedBlockItem(TsBlocks.MOLDY_RICE, settings().food(TsConsumables.MOLDY_RICE))); // TODO: give mrice status effect
         GRAPES = register("grapes", TsConsumables.GRAPES);
         GRAPE_SEEDS = register("grape_seeds", new TsAliasedBlockItem(TsBlocks.GRAPE, settings()));
         CORN = register("corn", new TsAliasedBlockItem(TsBlocks.YOUNG_CORN, settings()));

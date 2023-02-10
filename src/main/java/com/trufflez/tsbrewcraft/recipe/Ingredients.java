@@ -41,8 +41,8 @@ public class Ingredients {
     
     public static boolean isBeerType(ItemStack i) {
         return i.isOf( TsItems.BARLEY ) || 
-                i.isOf( TsItems.PALE_MALT ) ||
-                i.isOf( TsItems.DARK_MALT ) ||
+                i.isOf( TsItems.MALT ) ||
+                //i.isOf( TsItems.DARK_MALT ) ||
                 i.isOf( TsItems.CORN ) ||
                 i.isOf( Items.WHEAT );
     }

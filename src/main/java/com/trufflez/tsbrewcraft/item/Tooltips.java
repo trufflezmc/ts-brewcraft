@@ -44,8 +44,9 @@ public class Tooltips {
         if(i==TsItems.STRANGE_WINE) tooltip.add(tooltip("strange_wine"));
         
         if(i==TsItems.BARLEY) tooltip.add(tooltip("barley"));
-        if(i==TsItems.PALE_MALT) tooltip.add(tooltip("pale_malt"));
+        if(i==TsItems.MALT) tooltip.add(tooltip("malt"));
         if(i==TsItems.HOPS) tooltip.add(tooltip("hops"));
+        if(i==TsItems.HOPS_RHIZOME) tooltip.add(tooltip("hops_rhizome"));
         if(i==TsItems.RICE) tooltip.add(tooltip("rice"));
         if(i==TsItems.STEAMED_RICE) tooltip.add(tooltip("steamed_rice"));
         if(i==TsItems.MOLDY_RICE) tooltip.add(tooltip("moldy_rice"));
@@ -54,5 +55,9 @@ public class Tooltips {
         if(i==TsItems.AGAVE) tooltip.add(tooltip("agave"));
         
         if(i==TsItems.MALTOV_COCKTAIL) tooltip.add(tooltip("maltov_cocktail"));
+
+        if(i==TsItems.KEG) tooltip.add(tooltip("keg"));
+        if(i==TsItems.TRELLIS) tooltip.add(tooltip("trellis"));
+        if(i==TsItems.SULFUR_STICK) tooltip.add(tooltip("sulfur_stick"));
     }
 }
