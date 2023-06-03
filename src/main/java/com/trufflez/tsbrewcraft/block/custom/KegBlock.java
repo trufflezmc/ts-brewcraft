@@ -25,12 +25,13 @@ import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
+import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.explosion.Explosion;
 import org.jetbrains.annotations.Nullable;
 
-public class KegBlock extends BlockWithEntity implements BlockEntityProvider {
+public class KegBlock extends Block implements BlockEntityProvider {
     public static final DirectionProperty FACING;
     public static BooleanProperty SULFUR;
     public static BooleanProperty SEALED;
@@ -46,11 +47,12 @@ public class KegBlock extends BlockWithEntity implements BlockEntityProvider {
     @Nullable
     @Override
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) { return new KegBlockEntity(pos, state); }
-    
-    // archaic and possibly unnecessary code
+
     @Override
-    public BlockRenderType getRenderType(BlockState state) { return BlockRenderType.MODEL; }
-    
+    public boolean isTranslucent(BlockState state, BlockView world, BlockPos pos) {
+        return true;
+    }
+
     // not correct
     /*@Override
     public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, ShapeContext context) {

@@ -85,7 +85,7 @@ public class TsBlocks {
         STEAMED_RICE = registerItemless("steamed_rice", new SteamedRiceBlock(FabricBlockSettings.of(Material.WOOD).nonOpaque().breakInstantly().ticksRandomly()));
         MOLDY_RICE = registerItemless("moldy_rice", new Block(FabricBlockSettings.of(Material.WOOD).nonOpaque().breakInstantly()));
         
-        KEG = registerItemless("keg", new KegBlock(FabricBlockSettings.of(Material.WOOD).strength(4.0f)));
+        KEG = registerItemless("keg", new KegBlock(FabricBlockSettings.of(Material.WOOD).strength(4.0f).nonOpaque()));
 
         TRELLIS = registerItemless("trellis", new TrellisBlock(FabricBlockSettings.of(Material.WOOD).nonOpaque().strength(4.0f)));
         
